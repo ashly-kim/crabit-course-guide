@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>크래빗 아카데미 수강 안내</title>
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --dark: #071222;
+      --pink: #F06485;
+      --bg: #F5F4F2;
+      --white: #FFFFFF;
+      --text: #071222;
+      --mid: #666660;
+      --light: #AAAAAA;
+      --border: #E8E6E2;
+    }
+
+    body {
+      font-family: 'Pretendard Variable', Pretendard, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .sec-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .sec-title {
+      font-size: 38px;
+      font-weight: 700;
+      line-height: 1.3;
+      word-break: keep-all;
+      margin-bottom: 48px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .tag-online  { background: #EDEDEE; color: #777; }
+    .tag-offline { background: #FFF0F3; color: var(--pink); }
+    .tag-free    { background: var(--pink); color: white; }
+
+
+    /* ─────────────────────────────────────
+       HERO
+    ───────────────────────────────────── */
+    @keyframes gradientFlow {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hero {
+      background: linear-gradient(-45deg, #071222, #080F1C, #091520, #071018, #0A1628, #080D18);
+      background-size: 400% 400%;
+      animation: gradientFlow 10s ease infinite;
+      padding: 128px 0 140px;
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .confirm-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.5);
+      padding: 9px 22px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 32px;
+      letter-spacing: 0.04em;
+    }
+
+    .confirm-pill .dot {
+      width: 7px; height: 7px;
+      background: var(--pink);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-size: 50px;
+      font-weight: 700;
+      color: white;
+      line-height: 1.4;
+      margin-bottom: 24px;
+      word-break: keep-all;
+    }
+
+    .hero h1 .pink { color: var(--pink); }
+
+    .hero-desc {
+      font-size: 17px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.85;
+      word-break: keep-all;
+    }
+
+    .hero-desc strong { color: rgba(255,255,255,0.75); font-weight: 600; }
+
+    .cohort-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 44px;
+    }
+
+    .cohort-num {
+      font-size: 84px;
+      font-weight: 700;
+      color: var(--pink);
+      line-height: 1;
+      margin-bottom: 18px;
+    }
+
+    .cohort-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 16px;
+    }
+
+    .cohort-desc {
+      font-size: 17px;
+      color: rgba(255,255,255,0.42);
+      line-height: 1.85;
+      word-break: keep-all;
+    }
+
+
+    /* ─────────────────────────────────────
+       CURRICULUM
+    ───────────────────────────────────── */
+    .curriculum {
+      background: var(--bg);
+      padding: 88px 0;
+    }
+
+    .curriculum .sec-label { color: var(--light); }
+    .curriculum .sec-title { color: var(--text); }
+
+    .sessions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .session-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 36px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .session-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(7,18,34,0.1);
+    }
+
+    .session-card.offline { border-color: #FFE0E8; }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid #F2F2F2;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--light);
+    }
+
+    .session-card.offline .card-footer { border-top-color: #FFE8EE; }
+
+    .card-footer-arrow {
+      width: 28px; height: 28px;
+      background: var(--bg);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+      color: var(--mid);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .session-card:hover .card-footer-arrow {
+      background: var(--dark);
+      color: white;
+    }
+
+    .session-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+
+    .session-date {
+      font-size: 14px;
+      color: var(--light);
+      font-weight: 500;
+    }
+
+    .session-big-num {
+      font-size: 80px;
+      font-weight: 700;
+      color: #EBEBEB;
+      letter-spacing: -4px;
+      line-height: 1;
+      margin: 12px 0 14px;
+    }
+
+    .session-card.offline .session-big-num { color: #FFE0E8; }
+
+    .session-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.35;
+      margin-bottom: 20px;
+      word-break: keep-all;
+    }
+
+    .session-items { list-style: none; }
+
+    .session-items li {
+      display: flex;
+      gap: 10px;
+      font-size: 15.5px;
+      color: var(--mid);
+      line-height: 1.7;
+      padding: 4px 0;
+    }
+
+    .session-items li::before {
+      content: '';
+      display: block;
+      width: 4px; height: 4px;
+      background: #D5D5D5;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 9px;
+    }
+
+    .session-card.offline .session-items li::before { background: #F5B8C4; }
+
+    /* ── DETAIL PAGE ── */
+    .detail-view {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 1000;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .detail-view.active { transform: translateX(0); }
+
+    .detail-header {
+      background: linear-gradient(-45deg, #071222, #080F1C, #091520, #071018, #0A1628, #080D18);
+      background-size: 400% 400%;
+      animation: gradientFlow 10s ease infinite;
+      padding: 52px 0 60px;
+      position: relative;
+    }
+
+    .detail-header-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.7);
+      padding: 9px 18px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      margin-bottom: 36px;
+      transition: background 0.2s;
+    }
+
+    .back-btn:hover { background: rgba(255,255,255,0.14); }
+
+    .detail-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .detail-num {
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.1em;
+    }
+
+    .detail-session-num {
+      font-size: 80px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.1);
+      line-height: 1;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .detail-title {
+      font-size: 44px;
+      font-weight: 700;
+      color: white;
+      line-height: 1.3;
+      word-break: keep-all;
+      margin-bottom: 16px;
+    }
+
+    .detail-date {
+      font-size: 16px;
+      color: rgba(255,255,255,0.45);
+      font-weight: 500;
+    }
+
+    .detail-body {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 60px 48px;
+    }
+
+    .detail-curriculum {
+      margin-bottom: 60px;
+    }
+
+    .detail-section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 20px;
+    }
+
+    .detail-curriculum-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .detail-curriculum-list li {
+      background: white;
+      border-radius: 14px;
+      padding: 20px 24px;
+      font-size: 16px;
+      color: var(--mid);
+      line-height: 1.6;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .detail-curriculum-list li::before {
+      content: '';
+      display: block;
+      width: 6px; height: 6px;
+      background: #DEDEDE;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 8px;
+    }
+
+    .detail-curriculum-list.offline li::before { background: #F5B8C4; }
+
+    .detail-prep-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .detail-prep-block {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+    }
+
+    .detail-prep-block.review {
+      background: var(--dark);
+      color: white;
+    }
+
+    .detail-prep-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 16px;
+    }
+
+    .detail-prep-block.review .detail-prep-label { color: var(--pink); }
+
+    .detail-prep-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 24px;
+      line-height: 1.3;
+      word-break: keep-all;
+    }
+
+    .detail-prep-block.review .detail-prep-title { color: white; }
+
+    .detail-prep-items { list-style: none; }
+
+    .detail-prep-items li {
+      display: flex;
+      gap: 12px;
+      font-size: 16px;
+      color: var(--mid);
+      line-height: 1.7;
+      padding: 8px 0;
+      border-bottom: 1px solid #F5F5F5;
+    }
+
+    .detail-prep-items li:last-child { border-bottom: none; }
+
+    .detail-prep-block.review .detail-prep-items li {
+      color: rgba(255,255,255,0.65);
+      border-bottom-color: rgba(255,255,255,0.07);
+    }
+
+    .detail-prep-items li::before {
+      content: '';
+      display: block;
+      width: 5px; height: 5px;
+      background: #D5D5D5;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 10px;
+    }
+
+    .detail-prep-block.review .detail-prep-items li::before { background: var(--pink); }
+
+
+    /* ─────────────────────────────────────
+       KAKAO
+    ───────────────────────────────────── */
+    .kakao {
+      background: var(--white);
+      padding: 88px 0;
+    }
+
+    .kakao-layout {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .kakao .sec-label { color: var(--light); }
+    .kakao .sec-title { color: var(--text); margin-bottom: 20px; }
+
+    .kakao-notice {
+      background: var(--bg);
+      border-radius: 14px;
+      padding: 24px 26px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .n-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+
+    .n-text {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.75;
+      word-break: keep-all;
+    }
+
+    .n-text strong { color: var(--text); font-weight: 700; }
+
+    .kakao-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .kakao-card {
+      background: var(--bg);
+      border-radius: 14px;
+      padding: 30px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .k-icon { font-size: 26px; flex-shrink: 0; }
+
+    .k-text strong {
+      display: block;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 7px;
+    }
+
+    .k-text span {
+      font-size: 16px;
+      color: var(--light);
+      line-height: 1.7;
+    }
+
+
+    /* ─────────────────────────────────────
+       GIFT
+    ───────────────────────────────────── */
+    .gift {
+      background: #071222;
+      padding: 88px 0;
+    }
+
+    .gift .sec-label { color: var(--pink); }
+    .gift .sec-title { color: white; margin-bottom: 12px; }
+
+    .gift-sub {
+      font-size: 18px;
+      color: rgba(255,255,255,0.42);
+      margin-bottom: 52px;
+      line-height: 1.7;
+    }
+
+    .gift-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .gift-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 40px 34px;
+    }
+
+    .gift-card.final {
+      background: rgba(240,100,133,0.1);
+      border-color: rgba(240,100,133,0.25);
+    }
+
+    .gift-card-num {
+      font-size: 64px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.1);
+      line-height: 1;
+      margin-bottom: 28px;
+    }
+
+    .gift-card.final .gift-card-num { color: var(--pink); }
+
+    .gift-card-label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .gift-card.final .gift-card-label { color: rgba(240,100,133,0.7); }
+
+    .gift-card-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.45;
+      margin-bottom: 16px;
+      word-break: keep-all;
+    }
+
+    .gift-card-desc {
+      font-size: 16px;
+      color: rgba(255,255,255,0.44);
+      line-height: 1.8;
+      word-break: keep-all;
+    }
+
+
+    /* ─────────────────────────────────────
+       VENUE
+    ───────────────────────────────────── */
+    .venue {
+      background: var(--bg);
+      padding: 88px 0;
+    }
+
+    .venue-layout {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .venue .sec-label { color: var(--light); }
+    .venue .sec-title { color: var(--text); margin-bottom: 28px; }
+
+    .venue-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .venue-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .v-icon {
+      width: 44px; height: 44px;
+      background: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 19px;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+    }
+
+    .v-text { font-size: 18px; color: var(--mid); line-height: 1.5; }
+
+    .map-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      border-radius: 12px;
+      background: var(--pink);
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .venue-deco {
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 44px;
+      border: 1px solid var(--border);
+    }
+
+    .venue-deco-num {
+      font-size: 96px;
+      font-weight: 700;
+      color: rgba(0,0,0,0.06);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .venue-deco-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      word-break: keep-all;
+      line-height: 1.4;
+    }
+
+    .venue-deco-sub {
+      font-size: 17px;
+      color: var(--light);
+      line-height: 1.85;
+      word-break: keep-all;
+    }
+
+    .venue-deco-sub strong { color: var(--pink); font-weight: 700; }
+
+
+    /* ─────────────────────────────────────
+       REPORT
+    ───────────────────────────────────── */
+    .report {
+      background: var(--white);
+      padding: 96px 0;
+    }
+
+    .report-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 48px;
+      text-align: center;
+    }
+
+    .report .sec-label { color: var(--light); }
+    .report .sec-title { margin-bottom: 20px; }
+
+    .report-desc {
+      font-size: 18px;
+      color: var(--light);
+      line-height: 1.95;
+      word-break: keep-all;
+    }
+
+    .report-desc strong { color: var(--pink); font-weight: 700; }
+
+
+    /* ─────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      padding: 44px 0;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-brand {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--pink);
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .footer-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.32);
+      line-height: 1.85;
+    }
+
+    .footer-desc strong { color: rgba(255,255,255,0.68); }
+
+
+    /* ─────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────── */
+    @media (max-width: 960px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .kakao-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .gift-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .venue-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .venue-deco { display: none; }
+    }
+
+    @media (max-width: 680px) {
+      .inner, .hero-inner, .report-inner {
+        padding: 0 24px;
+      }
+
+      .hero { padding: 64px 0; }
+      .curriculum, .kakao, .gift, .venue, .report { padding: 64px 0; }
+      footer { padding: 36px 0; }
+
+      .hero h1 { font-size: 34px; }
+      .sec-title { font-size: 30px; margin-bottom: 32px; }
+
+      .sessions-grid { grid-template-columns: 1fr; }
+
+      .kakao-grid { grid-template-columns: 1fr; }
+
+      .gift-grid { grid-template-columns: 1fr; }
+
+      .cohort-num { font-size: 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="confirm-pill">
+          <span class="dot"></span>
+          결제 확인 완료
+        </div>
+        <h1>
+          데이터 경영 마스터클래스<br>
+          <span class="pink">가이드북</span>
+        </h1>
+        <p class="hero-desc">
+          <strong>우리 학원 성공방정식 찾기</strong> — 총 4회차 커리큘럼 안내,<br>
+          회차별 예습·복습 자료, 선물, 오프라인 장소까지<br>
+          이 가이드북 하나로 모두 확인하실 수 있습니다.
+        </p>
+      </div>
+      <div class="cohort-card">
+        <div class="cohort-num">10</div>
+        <div class="cohort-title">이번 기수는 단 10명만 함께합니다</div>
+        <p class="cohort-desc">
+          첫 교육인 만큼 원장님 한 분 한 분을 더욱 꼼꼼하게 봐드리며 확실한 아웃풋을 내실 수 있도록 하기 위함입니다. 이전에도 8분과 함께했는데, 4주 내내 정말 빡빡하게 채워졌을 만큼 집중도 높은 시간을 약속드립니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURRICULUM -->
+  <section class="curriculum">
+    <div class="inner">
+      <div class="sec-label">Curriculum</div>
+      <div class="sec-title">총 4회차 커리큘럼</div>
+      <div class="sessions-grid">
+
+        <div class="session-card" onclick="openDetail('d1')">
+          <div class="session-meta">
+            <span class="tag tag-online">온라인</span>
+            <span class="tag tag-free">무료</span>
+            <span class="session-date">5월 7일(목) · 오후 10:30</span>
+          </div>
+          <div class="session-big-num">01</div>
+          <div class="session-title">AI 시대, 살아남는 학원의 데이터 전략</div>
+          <ul class="session-items">
+            <li>AI 검색이 바꿔놓은 학원 선택의 판도 vs. 데이터 기반 운영의 차이</li>
+            <li>학원에서 데이터 기반의 경영이란 무슨 모습인가</li>
+            <li>회귀분석의 기본 개념 소개 및 교육과정 안내</li>
+            <li>우리 학원엔 지금 어떤 데이터가 있고, 앞으로 뭘 쌓아나가야 하는가</li>
+          </ul>
+          <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
+        </div>
+
+        <div class="session-card" onclick="openDetail('d2')">
+          <div class="session-meta">
+            <span class="tag tag-online">온라인</span>
+            <span class="session-date">5월 14일(목) · 오후 10:30</span>
+          </div>
+          <div class="session-big-num">02</div>
+          <div class="session-title">데이터와 학원의 운명적 만남</div>
+          <ul class="session-items">
+            <li>독립변수 vs. 종속변수 — "무엇이 성적에 영향을 주는가"</li>
+            <li>상관관계와 인과관계의 차이</li>
+            <li>학원 데이터의 다양한 유형과 우리 학원에 맞는 변수 설계</li>
+            <li>크래빗 서비스에 변수 세팅하고 데이터 입력 플로우 실습</li>
+          </ul>
+          <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
+        </div>
+
+        <div class="session-card" onclick="openDetail('d3')">
+          <div class="session-meta">
+            <span class="tag tag-online">온라인</span>
+            <span class="session-date">5월 21일(목) · 오후 10:30</span>
+          </div>
+          <div class="session-big-num">03</div>
+          <div class="session-title">성적을 만드는 우리 학원의 성공방정식</div>
+          <ul class="session-items">
+            <li>회귀분석 — 수식 없이 직관적으로 이해하기</li>
+            <li>"복습 β=0.42, 예습 β=0.05"가 의미하는 것</li>
+            <li>성장방정식 구조: 시험 점수 = α + β₁×복습시간 + β₂×출석률 + …</li>
+            <li>내 학원 데이터로 성장방정식 직접 도출</li>
+          </ul>
+          <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
+        </div>
+
+        <div class="session-card offline" onclick="openDetail('d4')">
+          <div class="session-meta">
+            <span class="tag tag-offline">오프라인</span>
+            <span class="session-date">5월 28일(목) · 오전 10:30 · 카페 칼리스타</span>
+          </div>
+          <div class="session-big-num">04</div>
+          <div class="session-title">데이터 리포트카드 실전 적용</div>
+          <ul class="session-items">
+            <li>성장방정식을 학생별 리포트로 전환하는 구조</li>
+            <li>R²(신뢰도 지표) 읽는 법 — "이 방정식을 얼마나 믿을 수 있나"</li>
+            <li>데이터 기반 학부모 상담의 3단계 흐름</li>
+            <li>리포트카드 생성 사이트 활용법 안내</li>
+          </ul>
+          <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- KAKAO -->
+  <section class="kakao">
+    <div class="inner">
+      <div class="kakao-layout">
+        <div class="kakao-left">
+          <div class="sec-label">Kakao Channel</div>
+          <div class="sec-title">카카오톡 채널로<br>꼼꼼하게 함께합니다</div>
+          <div class="kakao-notice">
+            <div class="n-icon">📅</div>
+            <div class="n-text">
+              단톡방은 <strong>5월 14일(목) 오전 중</strong>에 생성 후,
+              <strong>줌 링크와 함께</strong> 공유드리겠습니다.
+            </div>
+          </div>
+        </div>
+        <div class="kakao-grid">
+          <div class="kakao-card">
+            <div class="k-icon">🎞️</div>
+            <div class="k-text">
+              <strong>강의 녹화본 공유</strong>
+              <span>매 회차 종료 후 다시 보기 영상을 채널에 업로드해드립니다.</span>
+            </div>
+          </div>
+          <div class="kakao-card">
+            <div class="k-icon">📂</div>
+            <div class="k-text">
+              <strong>강의 자료 공유</strong>
+              <span>실습 파일, 강의 슬라이드, 참고 템플릿 등 회차별 자료를 전달드립니다.</span>
+            </div>
+          </div>
+          <div class="kakao-card">
+            <div class="k-icon">🔔</div>
+            <div class="k-text">
+              <strong>리마인더 안내</strong>
+              <span>강의 전 일정 알림과 준비 사항을 미리 공유해드립니다.</span>
+            </div>
+          </div>
+          <div class="kakao-card">
+            <div class="k-icon">🙋</div>
+            <div class="k-text">
+              <strong>Q&A 심층 지원</strong>
+              <span>막히는 부분은 채널에서 더욱 상세하게 답변드립니다.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GIFT -->
+  <section class="gift">
+    <div class="inner">
+      <div class="sec-label">Review Gift</div>
+      <div class="sec-title">회차별 후기 남겨주시면<br>드리는 특별 선물</div>
+      <p class="gift-sub">각 회차가 끝난 후 후기를 남겨주시면, 그 회차에 맞는 선물을 드립니다.</p>
+      <div class="gift-grid">
+
+        <div class="gift-card">
+          <div class="gift-card-num">01</div>
+          <div class="gift-card-label">1회차 후기 선물</div>
+          <div class="gift-card-name">회귀분석 전체 키워드 &amp; 개념 워크북</div>
+          <div class="gift-card-desc">강의에서 다 담지 못하는 개념까지 모두 정리된 워크북. 강의 전 미리 훑어보고, 강의 후 개념을 직접 기록하는 용도로 활용하실 수 있습니다.</div>
+        </div>
+
+        <div class="gift-card">
+          <div class="gift-card-num">02</div>
+          <div class="gift-card-label">2회차 후기 선물</div>
+          <div class="gift-card-name">연습문제 리스트</div>
+          <div class="gift-card-desc">배운 내용을 내 것으로 만들 수 있도록, 직접 풀어볼 수 있는 연습문제 모음을 드립니다.</div>
+        </div>
+
+        <div class="gift-card">
+          <div class="gift-card-num">03</div>
+          <div class="gift-card-label">3회차 후기 선물</div>
+          <div class="gift-card-name">리포트카드 적용 카드뉴스 + 학부모 상담 스크립트</div>
+          <div class="gift-card-desc">네이버 블로그에 바로 올릴 수 있는 사례 카드뉴스, 그리고 학부모 상담 현장에서 바로 쓸 수 있는 스크립트를 드립니다.</div>
+        </div>
+
+        <div class="gift-card final">
+          <div class="gift-card-num">04</div>
+          <div class="gift-card-label">4회차 오프라인 참석 선물</div>
+          <div class="gift-card-name">크래빗 아카데미 장학카드 + 수료증 &amp; 보도자료</div>
+          <div class="gift-card-desc">실제 참석하신 원장님들께만 장학카드를 드리며, 수료증과 함께 보도자료도 배포됩니다. 현장 사진도 함께 담아드립니다.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- VENUE -->
+  <section class="venue">
+    <div class="inner">
+      <div class="venue-layout">
+        <div class="venue-left">
+          <div class="sec-label">Offline · 4회차</div>
+          <div class="sec-title">5월 28일(목),<br>오프라인으로 만납니다</div>
+          <div class="venue-rows">
+            <div class="venue-row">
+              <div class="v-icon">📍</div>
+              <div class="v-text">카페 칼리스타 · 구로디지털단지역 부근 (지하철 2호선, 도보 이동 가능)</div>
+            </div>
+            <div class="venue-row">
+              <div class="v-icon">🕙</div>
+              <div class="v-text">오전 10:30 시작 · 10:00부터 입장 가능</div>
+            </div>
+            <div class="venue-row">
+              <div class="v-icon">🍱</div>
+              <div class="v-text">오후 12:00 점심 제공 — 참석하시는 모든 원장님께 드립니다</div>
+            </div>
+          </div>
+          <a href="https://naver.me/F9No8r9B" class="map-btn" target="_blank">
+            📌 &nbsp;네이버 지도로 위치 확인하기
+          </a>
+        </div>
+        <div class="venue-deco">
+          <div class="venue-deco-num">04</div>
+          <div class="venue-deco-title">마지막 회차는<br>직접 만납니다</div>
+          <p class="venue-deco-sub">
+            온라인으로 쌓아온 4주의 여정을 오프라인에서 마무리합니다.<br><br>
+            내 학원 데이터로 직접 리포트카드를 만들어보고,<br>
+            <strong>손에 쥐고 돌아가시는 것</strong>을 목표로 합니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPORT -->
+  <section class="report">
+    <div class="report-inner">
+      <div class="sec-label">Your Report Card</div>
+      <div class="sec-title">원하시는 리포트카드의 방향을<br>저희에게 알려주세요</div>
+      <p class="report-desc">
+        강의를 진행하시면서 <strong>원장님이 꿈꾸는 리포트카드의 모습</strong>을 자유롭게 상상해보세요.<br><br>
+        "학생별로 이런 항목이 보였으면 좋겠다", "학부모 상담 때 이런 데이터가 필요하다" 등<br>
+        어떤 아이디어든 환영합니다. 공유해주신 내용을 바탕으로<br>
+        <strong>원장님이 원하시는 방향대로 만들 수 있도록 적극적으로 지원</strong>하겠습니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">CRABIT ACADEMY</div>
+    <div class="footer-desc">
+      4회차 동안 알차고 실용적인 시간이 되도록 최선을 다하겠습니다.<br>
+      문의: <strong>카카오톡 채널</strong> 또는 <strong>hyunji@crabit.co.kr</strong>
+    </div>
+  </footer>
+
+  <!-- DETAIL: Session 1 -->
+  <div class="detail-view" id="d1">
+    <div class="detail-header">
+      <div class="detail-header-inner">
+        <button class="back-btn" onclick="closeDetail()">← 돌아가기</button>
+        <div class="detail-session-num">01</div>
+        <div class="detail-title">AI 시대, 살아남는 학원의 데이터 전략</div>
+        <div class="detail-meta"><span class="tag tag-online">온라인</span><span class="tag tag-free">무료</span><span style="color:rgba(255,255,255,0.6);font-size:15px;margin-left:8px;">5월 7일(목) · 오후 10:30</span></div>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div class="detail-prep-grid">
+        <div class="detail-prep-block">
+          <div class="detail-prep-label">예습</div>
+          <div class="detail-prep-title">미리 준비하면 더 깊이 배울 수 있어요</div>
+          <ul class="detail-prep-items">
+            <li>별도 준비물 없습니다</li>
+            <li>편안한 마음으로 참석해주세요</li>
+          </ul>
+        </div>
+        <div class="detail-prep-block review">
+          <div class="detail-prep-label">복습</div>
+          <div class="detail-prep-title">강의 후 이렇게 마무리해보세요</div>
+          <ul class="detail-prep-items">
+            <li>후기 남기시면 <strong>회귀분석 전체 키워드 &amp; 개념 워크북</strong> 제공</li>
+            <li>워크북으로 배운 개념 직접 정리해보기</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAIL: Session 2 -->
+  <div class="detail-view" id="d2">
+    <div class="detail-header">
+      <div class="detail-header-inner">
+        <button class="back-btn" onclick="closeDetail()">← 돌아가기</button>
+        <div class="detail-session-num">02</div>
+        <div class="detail-title">데이터와 학원의 운명적 만남</div>
+        <div class="detail-meta"><span class="tag tag-online">온라인</span><span style="color:rgba(255,255,255,0.6);font-size:15px;margin-left:8px;">5월 14일(목) · 오후 10:30</span></div>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div class="detail-prep-grid">
+        <div class="detail-prep-block">
+          <div class="detail-prep-label">예습</div>
+          <div class="detail-prep-title">미리 준비하면 더 깊이 배울 수 있어요</div>
+          <ul class="detail-prep-items">
+            <li>AI 챗봇 계정 준비 (ChatGPT 유료 권장, 제미나이·클로드도 가능)</li>
+            <li>우리 학원에서 현재 수집 중인 데이터 종류 떠올려보기</li>
+          </ul>
+        </div>
+        <div class="detail-prep-block review">
+          <div class="detail-prep-label">복습</div>
+          <div class="detail-prep-title">강의 후 이렇게 마무리해보세요</div>
+          <ul class="detail-prep-items">
+            <li>후기 남기시면 <strong>연습문제 리스트</strong> 제공</li>
+            <li>크래빗 서비스에 실제로 변수 세팅해보기</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAIL: Session 3 -->
+  <div class="detail-view" id="d3">
+    <div class="detail-header">
+      <div class="detail-header-inner">
+        <button class="back-btn" onclick="closeDetail()">← 돌아가기</button>
+        <div class="detail-session-num">03</div>
+        <div class="detail-title">성적을 만드는 우리 학원의 성공방정식</div>
+        <div class="detail-meta"><span class="tag tag-online">온라인</span><span style="color:rgba(255,255,255,0.6);font-size:15px;margin-left:8px;">5월 21일(목) · 오후 10:30</span></div>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div class="detail-prep-grid">
+        <div class="detail-prep-block">
+          <div class="detail-prep-label">예습</div>
+          <div class="detail-prep-title">미리 준비하면 더 깊이 배울 수 있어요</div>
+          <ul class="detail-prep-items">
+            <li>제공된 강의 교안 미리 훑어보기</li>
+            <li>샘플 데이터 파일 다운로드 (채널 공유 예정)</li>
+          </ul>
+        </div>
+        <div class="detail-prep-block review">
+          <div class="detail-prep-label">복습 · 과제</div>
+          <div class="detail-prep-title">강의 후 이렇게 마무리해보세요</div>
+          <ul class="detail-prep-items">
+            <li>샘플 데이터로 LLM 활용해 직접 회귀분석 해보기</li>
+            <li>4회차 실습을 위한 우리 학원 데이터 준비해오기</li>
+            <li>후기 남기시면 <strong>리포트카드 카드뉴스 + 상담 스크립트</strong> 제공</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAIL: Session 4 -->
+  <div class="detail-view" id="d4">
+    <div class="detail-header">
+      <div class="detail-header-inner">
+        <button class="back-btn" onclick="closeDetail()">← 돌아가기</button>
+        <div class="detail-session-num">04</div>
+        <div class="detail-title">데이터 리포트카드 실전 적용</div>
+        <div class="detail-meta"><span class="tag tag-offline">오프라인</span><span style="color:rgba(255,255,255,0.6);font-size:15px;margin-left:8px;">5월 28일(목) · 오전 10:30 · 카페 칼리스타</span></div>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div class="detail-prep-grid">
+        <div class="detail-prep-block">
+          <div class="detail-prep-label">예습 · 준비물</div>
+          <div class="detail-prep-title">미리 준비하면 더 깊이 배울 수 있어요</div>
+          <ul class="detail-prep-items">
+            <li>3회차 과제로 준비한 학원 데이터 지참</li>
+            <li>노트북 필참 (크래빗 사이트 직접 실습)</li>
+          </ul>
+        </div>
+        <div class="detail-prep-block review">
+          <div class="detail-prep-label">복습 · 마무리</div>
+          <div class="detail-prep-title">강의 후 이렇게 마무리해보세요</div>
+          <ul class="detail-prep-items">
+            <li>리포트카드 직접 만들고 학부모에게 전송해보기</li>
+            <li>크래빗에 후기 남기기 🩷</li>
+            <li>수료증 &amp; 장학카드 지급 (참석자 전원)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openDetail(id) {
+      document.getElementById(id).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDetail() {
+      document.querySelectorAll('.detail-view.active').forEach(el => el.classList.remove('active'));
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+  </script>
+</body>
+</html>
