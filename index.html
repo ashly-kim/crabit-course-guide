@@ -569,17 +569,38 @@
       line-height: 1.7;
     }
 
-    .gift-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
+    .gift-carousel-wrapper {
+      overflow: hidden;
+      margin: 0 -40px;
+    }
+
+    .gift-carousel-track {
+      display: flex;
+      gap: 18px;
+      animation: gift-scroll 28s linear infinite;
+      width: max-content;
+    }
+
+    .gift-carousel-track:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes gift-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
     .gift-card {
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: 40px 34px;
+      border-radius: 22px;
+      padding: 36px 32px;
+      width: 300px;
+      height: 300px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .gift-card.final {
@@ -588,40 +609,68 @@
     }
 
     .gift-card-num {
-      font-size: 64px;
+      font-size: 52px;
       font-weight: 700;
       color: rgba(255,255,255,0.1);
       line-height: 1;
-      margin-bottom: 28px;
     }
 
     .gift-card.final .gift-card-num { color: var(--pink); }
 
     .gift-card-label {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.06em;
       color: rgba(255,255,255,0.3);
       text-transform: uppercase;
-      margin-bottom: 14px;
+      margin-bottom: 8px;
     }
 
     .gift-card.final .gift-card-label { color: rgba(240,100,133,0.7); }
 
     .gift-card-name {
-      font-size: 22px;
+      font-size: 18px;
       font-weight: 700;
       color: rgba(255,255,255,0.92);
       line-height: 1.45;
-      margin-bottom: 16px;
       word-break: keep-all;
     }
 
     .gift-card-desc {
-      font-size: 16px;
-      color: rgba(255,255,255,0.44);
-      line-height: 1.8;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.75;
       word-break: keep-all;
+    }
+
+    /* 회차 상세 내 선물 배너 */
+    .detail-gift-banner {
+      margin-top: 20px;
+      background: rgba(240,100,133,0.12);
+      border: 1px solid rgba(240,100,133,0.28);
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .detail-gift-banner .gift-icon {
+      font-size: 20px;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .detail-gift-banner .gift-text {
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.65;
+    }
+
+    .detail-gift-banner .gift-text strong {
+      color: var(--pink);
+      font-weight: 700;
     }
 
 
@@ -784,10 +833,6 @@
         gap: 32px;
       }
 
-      .gift-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
       .venue-layout {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -811,8 +856,6 @@
       .sessions-grid { grid-template-columns: 1fr; }
 
       .kakao-grid { grid-template-columns: 1fr; }
-
-      .gift-grid { grid-template-columns: 1fr; }
 
       .cohort-num { font-size: 60px; }
     }
@@ -979,36 +1022,82 @@
       <div class="sec-label">Review Gift</div>
       <div class="sec-title">회차별 후기 남겨주시면<br>드리는 특별 선물</div>
       <p class="gift-sub">각 회차가 끝난 후 후기를 남겨주시면, 그 회차에 맞는 선물을 드립니다.</p>
-      <div class="gift-grid">
+      <div class="gift-carousel-wrapper">
+        <div class="gift-carousel-track">
+          <!-- 원본 4장 -->
+          <div class="gift-card">
+            <div class="gift-card-num">01</div>
+            <div>
+              <div class="gift-card-label">1회차 후기 선물</div>
+              <div class="gift-card-name">회귀분석 전체 키워드 &amp; 개념 워크북</div>
+            </div>
+            <div class="gift-card-desc">강의 전 미리 훑어보고, 강의 후 개념을 직접 기록하는 용도로 활용하실 수 있습니다.</div>
+          </div>
 
-        <div class="gift-card">
-          <div class="gift-card-num">01</div>
-          <div class="gift-card-label">1회차 후기 선물</div>
-          <div class="gift-card-name">회귀분석 전체 키워드 &amp; 개념 워크북</div>
-          <div class="gift-card-desc">강의에서 다 담지 못하는 개념까지 모두 정리된 워크북. 강의 전 미리 훑어보고, 강의 후 개념을 직접 기록하는 용도로 활용하실 수 있습니다.</div>
+          <div class="gift-card">
+            <div class="gift-card-num">02</div>
+            <div>
+              <div class="gift-card-label">2회차 후기 선물</div>
+              <div class="gift-card-name">연습문제 리스트</div>
+            </div>
+            <div class="gift-card-desc">배운 내용을 내 것으로 만들 수 있도록, 직접 풀어볼 수 있는 연습문제 모음을 드립니다.</div>
+          </div>
+
+          <div class="gift-card">
+            <div class="gift-card-num">03</div>
+            <div>
+              <div class="gift-card-label">3회차 후기 선물</div>
+              <div class="gift-card-name">리포트카드 카드뉴스 + 학부모 상담 스크립트</div>
+            </div>
+            <div class="gift-card-desc">네이버 블로그에 바로 올릴 수 있는 카드뉴스와 상담 현장에서 쓸 수 있는 스크립트를 드립니다.</div>
+          </div>
+
+          <div class="gift-card final">
+            <div class="gift-card-num">04</div>
+            <div>
+              <div class="gift-card-label">4회차 오프라인 참석 선물</div>
+              <div class="gift-card-name">크래빗 아카데미 장학카드 + 수료증 &amp; 보도자료</div>
+            </div>
+            <div class="gift-card-desc">실제 참석하신 원장님들께만 드리는 장학카드와 수료증, 현장 보도자료를 배포해드립니다.</div>
+          </div>
+
+          <!-- 무한 루프를 위한 복제 4장 -->
+          <div class="gift-card">
+            <div class="gift-card-num">01</div>
+            <div>
+              <div class="gift-card-label">1회차 후기 선물</div>
+              <div class="gift-card-name">회귀분석 전체 키워드 &amp; 개념 워크북</div>
+            </div>
+            <div class="gift-card-desc">강의 전 미리 훑어보고, 강의 후 개념을 직접 기록하는 용도로 활용하실 수 있습니다.</div>
+          </div>
+
+          <div class="gift-card">
+            <div class="gift-card-num">02</div>
+            <div>
+              <div class="gift-card-label">2회차 후기 선물</div>
+              <div class="gift-card-name">연습문제 리스트</div>
+            </div>
+            <div class="gift-card-desc">배운 내용을 내 것으로 만들 수 있도록, 직접 풀어볼 수 있는 연습문제 모음을 드립니다.</div>
+          </div>
+
+          <div class="gift-card">
+            <div class="gift-card-num">03</div>
+            <div>
+              <div class="gift-card-label">3회차 후기 선물</div>
+              <div class="gift-card-name">리포트카드 카드뉴스 + 학부모 상담 스크립트</div>
+            </div>
+            <div class="gift-card-desc">네이버 블로그에 바로 올릴 수 있는 카드뉴스와 상담 현장에서 쓸 수 있는 스크립트를 드립니다.</div>
+          </div>
+
+          <div class="gift-card final">
+            <div class="gift-card-num">04</div>
+            <div>
+              <div class="gift-card-label">4회차 오프라인 참석 선물</div>
+              <div class="gift-card-name">크래빗 아카데미 장학카드 + 수료증 &amp; 보도자료</div>
+            </div>
+            <div class="gift-card-desc">실제 참석하신 원장님들께만 드리는 장학카드와 수료증, 현장 보도자료를 배포해드립니다.</div>
+          </div>
         </div>
-
-        <div class="gift-card">
-          <div class="gift-card-num">02</div>
-          <div class="gift-card-label">2회차 후기 선물</div>
-          <div class="gift-card-name">연습문제 리스트</div>
-          <div class="gift-card-desc">배운 내용을 내 것으로 만들 수 있도록, 직접 풀어볼 수 있는 연습문제 모음을 드립니다.</div>
-        </div>
-
-        <div class="gift-card">
-          <div class="gift-card-num">03</div>
-          <div class="gift-card-label">3회차 후기 선물</div>
-          <div class="gift-card-name">리포트카드 적용 카드뉴스 + 학부모 상담 스크립트</div>
-          <div class="gift-card-desc">네이버 블로그에 바로 올릴 수 있는 사례 카드뉴스, 그리고 학부모 상담 현장에서 바로 쓸 수 있는 스크립트를 드립니다.</div>
-        </div>
-
-        <div class="gift-card final">
-          <div class="gift-card-num">04</div>
-          <div class="gift-card-label">4회차 오프라인 참석 선물</div>
-          <div class="gift-card-name">크래빗 아카데미 장학카드 + 수료증 &amp; 보도자료</div>
-          <div class="gift-card-desc">실제 참석하신 원장님들께만 장학카드를 드리며, 수료증과 함께 보도자료도 배포됩니다. 현장 사진도 함께 담아드립니다.</div>
-        </div>
-
       </div>
     </div>
   </section>
@@ -1098,9 +1187,12 @@
           <div class="detail-prep-label">복습</div>
           <div class="detail-prep-title">강의 후 이렇게 마무리해보세요</div>
           <ul class="detail-prep-items">
-            <li>후기 남기시면 <strong>회귀분석 전체 키워드 &amp; 개념 워크북</strong> 제공</li>
             <li>워크북으로 배운 개념 직접 정리해보기</li>
           </ul>
+          <div class="detail-gift-banner">
+            <span class="gift-icon">🎁</span>
+            <div class="gift-text">1회차 후기를 남겨주시면<br><strong>회귀분석 전체 키워드 &amp; 개념 워크북</strong>을 드려요!</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1130,9 +1222,12 @@
           <div class="detail-prep-label">복습</div>
           <div class="detail-prep-title">강의 후 이렇게 마무리해보세요</div>
           <ul class="detail-prep-items">
-            <li>후기 남기시면 <strong>연습문제 리스트</strong> 제공</li>
             <li>크래빗 서비스에 실제로 변수 세팅해보기</li>
           </ul>
+          <div class="detail-gift-banner">
+            <span class="gift-icon">🎁</span>
+            <div class="gift-text">2회차 후기를 남겨주시면<br><strong>연습문제 리스트</strong>를 드려요!</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1164,8 +1259,11 @@
           <ul class="detail-prep-items">
             <li>샘플 데이터로 LLM 활용해 직접 회귀분석 해보기</li>
             <li>4회차 실습을 위한 우리 학원 데이터 준비해오기</li>
-            <li>후기 남기시면 <strong>리포트카드 카드뉴스 + 상담 스크립트</strong> 제공</li>
           </ul>
+          <div class="detail-gift-banner">
+            <span class="gift-icon">🎁</span>
+            <div class="gift-text">3회차 후기를 남겨주시면<br><strong>리포트카드 카드뉴스 + 학부모 상담 스크립트</strong>를 드려요!</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1196,9 +1294,11 @@
           <div class="detail-prep-title">강의 후 이렇게 마무리해보세요</div>
           <ul class="detail-prep-items">
             <li>리포트카드 직접 만들고 학부모에게 전송해보기</li>
-            <li>크래빗에 후기 남기기 🩷</li>
-            <li>수료증 &amp; 장학카드 지급 (참석자 전원)</li>
           </ul>
+          <div class="detail-gift-banner">
+            <span class="gift-icon">🎁</span>
+            <div class="gift-text">4회차 오프라인 참석자 전원께<br><strong>크래빗 아카데미 장학카드 + 수료증 &amp; 보도자료</strong>를 드려요!</div>
+          </div>
         </div>
       </div>
     </div>
