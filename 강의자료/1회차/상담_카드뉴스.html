@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>리포트 기반 상담 Before & After</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #dde3e8;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  padding: 48px 20px 100px;
+}
+
+/* ── COVER CARD ── */
+.cover-card {
+  width: 1080px;
+  height: 1080px;
+  margin: 0 auto 44px;
+  border-radius: 20px;
+  box-shadow: 0 8px 48px rgba(0,0,0,0.18);
+  background: linear-gradient(145deg, #111827 0%, #1a2f4a 55%, #0f3428 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 100px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cover-card::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,196,113,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cover-card::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99,102,241,0.14) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cover-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #00C471;
+  margin-bottom: 28px;
+}
+.cover-title {
+  font-size: 52px;
+  font-weight: 900;
+  color: white;
+  line-height: 1.25;
+  margin-bottom: 24px;
+  position: relative;
+}
+.cover-title em {
+  font-style: normal;
+  color: #a8f060;
+}
+.cover-desc {
+  font-size: 17px;
+  color: #9ca3af;
+  line-height: 1.85;
+  margin-bottom: 40px;
+  max-width: 600px;
+}
+.cover-desc strong { color: #e5e7eb; }
+.cover-chips {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+.cover-chip {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #d1d5db;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 18px;
+  border-radius: 100px;
+}
+.cover-chip.green { border-color: rgba(0,196,113,0.35); color: #a8f060; background: rgba(0,196,113,0.08); }
+
+/* ── SCENARIO CARD ── */
+.card {
+  width: 1080px;
+  margin: 0 auto 44px;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 28px rgba(0,0,0,0.09);
+}
+
+/* slide number strip */
+.card-head {
+  background: #1f2937;
+  padding: 22px 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.case-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #00C471;
+  background: rgba(0,196,113,0.15);
+  padding: 5px 12px;
+  border-radius: 4px;
+  letter-spacing: 0.12em;
+  flex-shrink: 0;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  flex: 1;
+}
+
+.card-tag {
+  font-size: 13px;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+/* ── SPLIT ── */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ── COL LABEL ── */
+.col-head {
+  padding: 14px 24px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.col-before .col-head { background: #ffeaea; }
+.col-after  .col-head { background: #e6faf0; }
+
+.badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 11px;
+  border-radius: 4px;
+  letter-spacing: 0.1em;
+}
+.badge-b { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+.badge-a { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
+
+.col-sub {
+  font-size: 14px;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+/* ── COLUMNS ── */
+.col-before { background: #fff8f8; border-right: 1px solid #fde8e8; }
+.col-after  { background: #f7fefb; }
+
+/* ── DIALOGUE AREA ── */
+.dialogue {
+  padding: 22px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── WHO ROW (avatar + name) ── */
+.who-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 4px;
+}
+.who-row.dir-row { justify-content: flex-end; }
+
+.avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  font-weight: 900;
+  flex-shrink: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  background: #9ca3af;
+  color: white;
+}
+
+/* ── BUBBLES ── */
+.msg {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 88%;
+}
+
+.msg.dir { align-self: flex-end; }
+.msg.cli { align-self: flex-start; }
+
+.who {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 0 3px;
+  color: #1f2937;
+}
+
+.bub {
+  font-size: 15px;
+  line-height: 1.75;
+  padding: 12px 16px;
+  border-radius: 14px;
+}
+
+/* BEFORE — 원장님(오른쪽) */
+.col-before .msg.dir .bub {
+  background: #fff0f0;
+  border: 1.5px solid #fca5a5;
+  color: #5a0a0a;
+  border-radius: 14px 4px 14px 14px;
+}
+/* BEFORE — 학부모/학생(왼쪽) */
+.col-before .msg.cli .bub {
+  background: #ffe4e4;
+  border: 1.5px solid #fca5a5;
+  color: #7f1d1d;
+  border-radius: 4px 14px 14px 14px;
+}
+
+/* AFTER — 원장님(오른쪽) */
+.col-after .msg.dir .bub {
+  background: #e6fbf0;
+  border: 1.5px solid #6ee7a8;
+  color: #064e2e;
+  border-radius: 14px 4px 14px 14px;
+  box-shadow: 0 2px 8px rgba(0,196,113,0.10);
+}
+/* AFTER — 학부모/학생(왼쪽) */
+.col-after .msg.cli .bub {
+  background: #d8f9eb;
+  border: 1.5px solid #6ee7a8;
+  color: #065f46;
+  border-radius: 4px 14px 14px 14px;
+}
+
+/* ── DATA CALLOUT ── */
+.data-box {
+  margin-top: 9px;
+  padding: 10px 14px;
+  background: rgba(0,196,113,0.10);
+  border-left: 4px solid #00C471;
+  border-radius: 0 8px 8px 0;
+  font-size: 13px;
+  color: #064e2e;
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.7;
+}
+.data-box strong {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #00a85a;
+  margin-bottom: 5px;
+}
+
+/* ── OUTCOME BAR ── */
+.outcome {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid #f0f0f0;
+}
+.out {
+  padding: 16px 26px;
+  font-size: 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.6;
+}
+.out-b { background: #fff0f0; color: #9b1c1c; }
+.out-a { background: #ecfdf5; color: #065f46; border-left: 1px solid #f0f0f0; }
+.out-icon { font-size: 17px; flex-shrink: 0; margin-top: 2px; }
+
+/* ── SECTION LABEL ── */
+.section-label {
+  width: 1080px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.section-label:first-of-type { margin-top: 0; }
+.s-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+.s-icon-p { background: #fef3c7; }
+.s-icon-s { background: #d1fae5; }
+.s-name {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111827;
+}
+.s-desc { font-size: 14px; color: #6b7280; margin-top: 3px; }
+
+/* ── DIVIDER ── */
+.sec-div {
+  width: 1080px;
+  margin: 8px auto 32px;
+  border: none;
+  border-top: 1px solid #d1d5db;
+}
+</style>
+</head>
+<body>
+
+<div class="cover-card">
+  <div class="cover-eyebrow">Crabit Learnit · 강의 활용 자료 &nbsp;|&nbsp; 01 / 07</div>
+  <h1 class="cover-title">리포트 <em>한 장</em>이<br>상담을 바꾼다</h1>
+  <p class="cover-desc">데이터 없이 감으로 상담하던 원장이, <strong>리포트 한 장</strong>으로<br>학부모·학생과 나누는 대화가 어떻게 달라지는지<br>보여주는 6가지 시나리오</p>
+  <div class="cover-chips">
+    <span class="cover-chip">👩‍👧 학부모 상담 · 3가지</span>
+    <span class="cover-chip green">📖 학생 상담 · 3가지</span>
+  </div>
+</div>
+
+<div class="section-label">
+  <div class="s-icon s-icon-p">👩‍👧</div>
+  <div>
+    <div class="s-name">학부모 상담 시나리오</div>
+    <div class="s-desc">학부모가 불만·이탈·수강료 결정을 꺼낼 때</div>
+  </div>
+</div>
+
+<!-- CASE 01 -->
+<div class="card">
+  <div class="card-head">
+    <span class="case-badge">CASE 01</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4b5563;letter-spacing:0.1em;">02 / 07</span>
+    <span class="card-title">성적이 잘 안 오른다는 불만 상담</span>
+    <span class="card-tag">중3 수학 / 현재 4등급</span>
+  </div>
+  <div class="split">
+    <div class="col-before">
+      <div class="col-head">
+        <span class="badge badge-b">BEFORE</span>
+        <span class="col-sub">리포트 없이 감으로 상담</span>
+      </div>
+      <div class="dialogue">
+        <div class="msg cli">
+          <div class="who-row"><div class="avatar av-p1">민</div><span class="who">민준이 어머님</span></div>
+          <div class="bub">원장님, 저희 아이가 6개월째 다니는데 성적이 그대로예요. 뭐가 문제인 건가요?</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">어머니, 저도 걱정이에요. 민준이가 열심히 하긴 하는데… 조금 더 집중해야 할 것 같아요. 가정에서도 복습을 더 시켜주시면 좋겠어요.</div>
+        </div>
+        <div class="msg cli">
+          <div class="who-row"><div class="avatar av-p1">민</div><span class="who">민준이 어머님</span></div>
+          <div class="bub">그 말씀 6개월 전에도 하셨어요. 구체적으로 뭘 어떻게 해야 하는지 모르겠어요.</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">맞아요, 죄송합니다. 좀 더 신경 쓰겠습니다. 일단 숙제를 꼭 챙겨줄게 하고, 음…</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-after">
+      <div class="col-head">
+        <span class="badge badge-a">AFTER</span>
+        <span class="col-sub">리포트 기반 데이터 상담</span>
+      </div>
+      <div class="dialogue">
+        <div class="msg cli">
+          <div class="who-row"><div class="avatar av-p1">민</div><span class="who">민준이 어머님</span></div>
+          <div class="bub">원장님, 저희 아이가 6개월째 다니는데 성적이 그대로예요. 뭐가 문제인 건가요?</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">어머니, 마침 민준이 리포트가 나왔어요. 같이 보시겠어요?
+            <div class="data-box">
+              <strong>민준 리포트 요약</strong>
+              출석률 91% · 숙제 완성률 48% · 자기학습 0.5h/일<br>
+              → 예측 점수: 현재 68점 (목표 85점 +17점 가능)
+            </div>
+          </div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">숙제 완성률 80% 이상인 학생이 그 이하 학생보다 평균 11점 높아요. 민준이는 지금 48%예요. 여기가 핵심이에요.</div>
+        </div>
+        <div class="msg cli">
+          <div class="who-row"><div class="avatar av-p1">민</div><span class="who">민준이 어머님</span></div>
+          <div class="bub">숙제를 잘 안해오고 있었던거군요?</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">네. 자기학습도 하루 0.5시간인데, 85점대 학생들은 평균 1.8시간이에요. 이 두 가지만 바꾸면 10점 이상 오를 수 있어요.
+            <div class="data-box">
+              <strong>개선 목표 (3개월)</strong>
+              숙제 완성률 48% → 80%<br>
+              자기학습 0.5h → 1.5h/일<br>
+              예측 도달 점수: 79~84점
+            </div>
+          </div>
+        </div>
+        <div class="msg cli">
+          <div class="who-row"><div class="avatar av-p1">민</div><span class="who">민준이 어머님</span></div>
+          <div class="bub">이렇게 구체적으로 보여주시니 어디에 집중해야 할지 확실히 알겠네요. 집에서 숙제 체크를 제가 더 해볼게요.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="outcome">
+    <div class="out out-b"><span class="out-icon">✗</span>막연한 "더 이하해"로 끝남. 학부모 신뢰 하락. 이탈 가능성 높음.</div>
+    <div class="out out-a"><span class="out-icon">✓</span>문제 원인이 숫자로 특정됨. 학부모가 개선 역할을 자발적으로 인수. 이탈 방어.</div>
+  </div>
+</div>
+
+<!-- CASE 02 -->
+<div class="card">
+  <div class="card-head">
+    <span class="case-badge">CASE 02</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4b5563;letter-spacing:0.1em;">03 / 07</span>
+    <span class="card-title">학원을 옮기겠다는 학부모 붙잡기</span>
+    <span class="card-tag">초6 영어 / 현재 중간권</span>
+  </div>
+  <div class="split">
+    <div class="col-before">
+      <div class="col-head">
+        <span class="badge badge-b">BEFORE</span>
+        <span class="col-sub">리포트 없이 감으로 상담</span>
+      </div>
+      <div class="dialogue">
+        <div class="msg cli">
+          <div class="who-row"><div class="avatar av-p2">지</div><span class="who">지수 어머님</span></div>
+          <div class="bub">저희가 다음 달에 ○○학원으로 옮길까 생각 중이에요. 거기서 레벨테스트 결과가 좋게 나왔거든요.</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">아이고, 그러세요? 저희는 지금 잘 가르치고 있는데 많이 아쉽네요. 아직 여기서 더 성장할 수 있는데…</div>
+        </div>
+        <div class="msg cli">
+          <div class="who-row"><div class="avatar av-p2">지</div><span class="who">지수 어머님</span></div>
+          <div class="bub">그렇긴 한데, 거기가 커리큘럼이 더 체계적인 것 같아서요.</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">저희도 체계적으로 잘 따르고 있어요. 한 번 더 생각해 보세요.</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-after">
+      <div class="col-head">
+        <span class="badge badge-a">AFTER</span>
+        <span class="col-sub">리포트 기반 데이터 상담</span>
+      </div>
+      <div class="dialogue">
+        <div class="msg cli">
+          <div class="who-row"><div class="avatar av-p2">지</div><span class="who">지수 어머님</span></div>
+          <div class="bub">저희가 다음 달에 ○○학원으로 옮길까 생각 중이에요.</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">결정하시기 전에 지수 리포트 한 번만 보시겠어요? 지난 4개월 데이터가 있어요.
+            <div class="data-box">
+              <strong>지수 성장 추이</strong>
+              8월 출석률 72% → 11월 94%<br>
+              숙제 완성률 55% → 87%<br>
+              월별 테스트: 61 → 71 → 76 → 81점
+            </div>
+          </div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">4개월 동안 20점이 올랐어요. 이 추세라면 3개월 후 90점도 가능해요. 지금이 상승 여세예요. 이 시점에 학원을 바꾸면 적응 기간만 2~3개월이 걸려요.</div>
+        </div>
+        <div class="msg cli">
+          <div class="who-row"><div class="avatar av-p2">지</div><span class="who">지수 어머님</span></div>
+          <div class="bub">이렇게 데이터로 보니까… 생각보다 많이 성장했네요. 몰랐어요.</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">3개월만 더 보시면 결과가 나와요. 그래 판단하셔도 늦지 않아요.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="outcome">
+    <div class="out out-b"><span class="out-icon">✗</span>감정적 호소만으로는 설득 어려움. 학원 이탈로 이어짐.</div>
+    <div class="out out-a"><span class="out-icon">✓</span>성장 데이터가 스스로 말함. 학부모가 직접 "몰랐다"고 인정 → 이탈 방어.</div>
+  </div>
+</div>
+
+<!-- CASE 03 -->
+<div class="card">
+  <div class="card-head">
+    <span class="case-badge">CASE 03</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4b5563;letter-spacing:0.1em;">04 / 07</span>
+    <span class="card-title">수강료 인상 수용</span>
+    <span class="card-tag">중1 국어·수학 / 신규 수강 전</span>
+  </div>
+  <div class="split">
+    <div class="col-before">
+      <div class="col-head">
+        <span class="badge badge-b">BEFORE</span>
+        <span class="col-sub">리포트 없이 감으로 상담</span>
+      </div>
+      <div class="dialogue">
+        <div class="msg cli">
+          <div class="who-row"><div class="avatar av-p3">새</div><span class="who">새이 어머님</span></div>
+          <div class="bub">수학도 추가로 등록하고 싶은데 월 15만 원이 좀 부담스러워요. 효과가 있을지도 모르겠고요.</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">저희 학생들 관리 잘 하니까 분명히 도움이 될 거예요. 믿어보세요.</div>
+        </div>
+        <div class="msg cli">
+          <div class="who-row"><div class="avatar av-p3">새</div><span class="who">새이 어머님</span></div>
+          <div class="bub">그렇긴 한데 확신이 없으니까요…</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-after">
+      <div class="col-head">
+        <span class="badge badge-a">AFTER</span>
+        <span class="col-sub">리포트 기반 데이터 상담</span>
+      </div>
+      <div class="dialogue">
+        <div class="msg cli">
+          <div class="who-row"><div class="avatar av-p3">새</div><span class="who">새이 어머님</span></div>
+          <div class="bub">수학도 추가로 등록하고 싶은데 월 15만 원이 좀 부담스러워요.</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">어머니, 우리 학원 데이터를 보면 국어와 수학을 동시에 수강한 학생의 성적 향상폭이 국어만 수강한 학생보다 평균 1.4배 높아요.
+            <div class="data-box">
+              <strong>우리 학원 분석 결과</strong>
+              국어 단과: 평균 +8점 (6개월)<br>
+              국어+수학 병행: 평균 +13점 (6개월)<br>
+              → 두 과목 시너지 확인됨
+            </div>
+          </div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">지금 새이가 국어 출석률 96%인데, 이 수준이면 수학도 충분히 따라올 수 있어요. 첫 달 결과 보시고 결정하셔도 돼요.</div>
+        </div>
+        <div class="msg cli">
+          <div class="who-row"><div class="avatar av-p3">새</div><span class="who">새이 어머님</span></div>
+          <div class="bub">데이터로 보여주시니 명료가 가네요. 한 번 해볼게요.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="outcome">
+    <div class="out out-b"><span class="out-icon">✗</span>"믿어보세요"는 근거 없음. 미등록으로 종결.</div>
+    <div class="out out-a"><span class="out-icon">✓</span>데이터가 ROI를 증명. 수강 추가 결정. 객단가 상승.</div>
+  </div>
+</div>
+
+<hr class="sec-div">
+
+<!-- ═══════════════════════════════════════
+     PART 2 : 학생 상담
+════════════════════════════════════════ -->
+<div class="section-label">
+  <div class="s-icon s-icon-s">📖</div>
+  <div>
+    <div class="s-name">학생 상담 시나리오</div>
+    <div class="s-desc">원장이 학생 개인과 목표·동기·방향을 이야기할 때</div>
+  </div>
+</div>
+
+<!-- CASE 04 -->
+<div class="card">
+  <div class="card-head">
+    <span class="case-badge">CASE 04</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4b5563;letter-spacing:0.1em;">05 / 07</span>
+    <span class="card-title">의욕 없는 학생에게 목표 부여하기</span>
+    <span class="card-tag">중2 수학 / 현재 5등급 · 무기력형</span>
+  </div>
+  <div class="split">
+    <div class="col-before">
+      <div class="col-head">
+        <span class="badge badge-b">BEFORE</span>
+        <span class="col-sub">리포트 없이 감으로 상담</span>
+      </div>
+      <div class="dialogue">
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">수정아, 요즘 왜 이렇게 의욕이 없어? 더 열심히 해야지.</div>
+        </div>
+        <div class="msg cli student">
+          <div class="who-row"><div class="avatar av-s1">수</div><span class="who">이수정</span></div>
+          <div class="bub">어차피 해도 성적이 안 올라와요…</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">그렇지 않아. 열심히 하면 분명히 오를 거야. 포기하면 안 되지.</div>
+        </div>
+        <div class="msg cli student">
+          <div class="who-row"><div class="avatar av-s1">수</div><span class="who">이수정</span></div>
+          <div class="bub">…네.</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-after">
+      <div class="col-head">
+        <span class="badge badge-a">AFTER</span>
+        <span class="col-sub">리포트 기반 데이터 상담</span>
+      </div>
+      <div class="dialogue">
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">수정아, 이 리포트 같이 볼까? 네 데이터야.</div>
+        </div>
+        <div class="msg cli student">
+          <div class="who-row"><div class="avatar av-s1">수</div><span class="who">이수정</span></div>
+          <div class="bub">뭐래요?</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">지금 네 숙제 완성률이 42%야. 근데 우리 학원에서 3등급 받는 애들 평균이 79%거든. 딱 이것만 바꿔도 점수가 올라.
+            <div class="data-box">
+              <strong>수정 현재 데이터</strong>
+              숙제 완성률 42% → 목표 80%<br>
+              예측: 현재 53점 → 65점 (+12점)
+            </div>
+          </div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">재능 문제가 아니야. 숙제 80%만 채우면 65점 나온다고 데이터가 말하고 있어. 딱 한 가지만 바꿔봐.</div>
+        </div>
+        <div class="msg cli student">
+          <div class="who-row"><div class="avatar av-s1">수</div><span class="who">이수정</span></div>
+          <div class="bub">65점이요? 진짜로요? …그거면 할 수 있을 것 같은데요.</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">65점 넘으면 크래빗 포인트 3,000점 줄게. 다음 달에 리포트로 확인하자.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="outcome">
+    <div class="out out-b"><span class="out-icon">✗</span>"열심히 해"는 무기력한 학생에게 아무 효력 없음. 학생 입장에서 "이미 하고 있는데?"로 끝남.</div>
+    <div class="out out-a"><span class="out-icon">✓</span>구체적 수치 목표 + 달성 가능성 + 보상 연동. 학생이 스스로 "할 수 있겠다"고 반응.</div>
+  </div>
+</div>
+
+<!-- CASE 05 -->
+<div class="card">
+  <div class="card-head">
+    <span class="case-badge">CASE 05</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4b5563;letter-spacing:0.1em;">06 / 07</span>
+    <span class="card-title">노력하는데 성적이 안 오르는 학생 진단</span>
+    <span class="card-tag">중3 영어 / 현재 3등급 · 노력형</span>
+  </div>
+  <div class="split">
+    <div class="col-before">
+      <div class="col-head">
+        <span class="badge badge-b">BEFORE</span>
+        <span class="col-sub">리포트 없이 감으로 상담</span>
+      </div>
+      <div class="dialogue">
+        <div class="msg cli student">
+          <div class="who-row"><div class="avatar av-s2">상</div><span class="who">이상아</span></div>
+          <div class="bub">원장님, 저 진짜 이렇게 열심히 하는데 왜 성적이 안 오르는지 모르겠어요.</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">음… 공부 방법이 잘못됐을 수도 있어. 문제 풀 때 해설을 꼼꼼히 봐야 해.</div>
+        </div>
+        <div class="msg cli student">
+          <div class="who-row"><div class="avatar av-s2">상</div><span class="who">이상아</span></div>
+          <div class="bub">그건 하고 있는데요…</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">그러면 좀 더 반복해봐. 영어는 반복이 중요해.</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-after">
+      <div class="col-head">
+        <span class="badge badge-a">AFTER</span>
+        <span class="col-sub">리포트 기반 데이터 상담</span>
+      </div>
+      <div class="dialogue">
+        <div class="msg cli student">
+          <div class="who-row"><div class="avatar av-s2">상</div><span class="who">이상아</span></div>
+          <div class="bub">원장님, 저 진짜 열심히 하는데 왜 성적이 안 오르는지 모르겠어요.</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">리포트 봐. 이상한 데이터 뽑아냈어.
+            <div class="data-box">
+              <strong>이상아 리포트</strong>
+              출석률 98% · 숙제 완성률 91% → 최상위<br>
+              자기학습 2.1h/일 → 충분함<br>
+              테스트 점수: 74점 (3개월째 정체)
+            </div>
+          </div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">출석이나 숙제도 최상이야. 점수가 안 오른다면 학습 방향 문제야. 많이 하는데 효율이 낮은 패턴이거든. 오답 노트 쓰고 있어?</div>
+        </div>
+        <div class="msg cli student">
+          <div class="who-row"><div class="avatar av-s2">상</div><span class="who">이상아</span></div>
+          <div class="bub">아니요, 그냥 넘기기만 했어요.</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">찾았다. 우리 학원에서 같은 시간 공부하고 85점 이상 받는 애들은 전부 오답 분석을 해. 이것만 추가하면 돼. 영어가 아니라 방향의 문제야.</div>
+        </div>
+        <div class="msg cli student">
+          <div class="who-row"><div class="avatar av-s2">상</div><span class="who">이상아</span></div>
+          <div class="bub">오… 그래서 안 오른 거였구나. 그럼 오답 노트만 추가하면 된다는 거죠?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="outcome">
+    <div class="out out-b"><span class="out-icon">✗</span>원인 진단 없이 일반적 조언만. 학생 입장에서 "이미 하고 있는데?"로 끝남.</div>
+    <div class="out out-a"><span class="out-icon">✓</span>데이터로 "양의 문제가 아님"을 증명. 학생이 원인을 정확히 이해하고 다음 행동을 스스로 설정.</div>
+  </div>
+</div>
+
+<!-- CASE 06 -->
+<div class="card">
+  <div class="card-head">
+    <span class="case-badge">CASE 06</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#4b5563;letter-spacing:0.1em;">07 / 07</span>
+    <span class="card-title">상위권 진입을 목표로 하는 학생과 로드맵 세우기</span>
+    <span class="card-tag">중2 수학 / 현재 2등급 · 목표 1등급</span>
+  </div>
+  <div class="split">
+    <div class="col-before">
+      <div class="col-head">
+        <span class="badge badge-b">BEFORE</span>
+        <span class="col-sub">리포트 없이 감으로 상담</span>
+      </div>
+      <div class="dialogue">
+        <div class="msg cli student">
+          <div class="who-row"><div class="avatar av-s3">준</div><span class="who">박준우</span></div>
+          <div class="bub">원장님, 저 1등급 받고 싶어요. 어떻게 해야 해요?</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">1등급이 쉽지 않지. 일단 기본 개념을 완벽하게 잡고, 심화 문제를 많이 풀어야 해. 꾸준히 하는 게 중요해.</div>
+        </div>
+        <div class="msg cli student">
+          <div class="who-row"><div class="avatar av-s3">준</div><span class="who">박준우</span></div>
+          <div class="bub">구체적으로 하루에 얼마나 해야 해요?</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">음… 최소 2시간은 해야지. 그리고 오답 정리도 꼭 하고.</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-after">
+      <div class="col-head">
+        <span class="badge badge-a">AFTER</span>
+        <span class="col-sub">리포트 기반 데이터 상담</span>
+      </div>
+      <div class="dialogue">
+        <div class="msg cli student">
+          <div class="who-row"><div class="avatar av-s3">준</div><span class="who">박준우</span></div>
+          <div class="bub">원장님, 저 1등급 받고 싶어요. 어떻게 해야 해요?</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">좋아, 데이터로 봐. 우리 학원에서 1등급 받은 애들 패턴이야.
+            <div class="data-box">
+              <strong>우리 학원 1등급 패턴</strong>
+              출석률 96% 이상 · 숙제 완성률 88% 이상<br>
+              자기학습 2.0h/일 이상 · 오답노트 주 3회 이상
+            </div>
+          </div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">지금 네 데이터랑 비교해볼게. 출석 97% → 완벽해. 숙제 71% → 여기가 갭이야. 자기학습 1.3시간 → 0.7시간 더 필요해.</div>
+        </div>
+        <div class="msg cli student">
+          <div class="who-row"><div class="avatar av-s3">준</div><span class="who">박준우</span></div>
+          <div class="bub">그러면 숙제 완성률이랑 공부 시간만 올리면 1등급 가능하다는 거예요?</div>
+        </div>
+        <div class="msg dir">
+          <div class="who-row dir-row"><span class="who">원장님</span><div class="avatar av-d">원</div></div>
+          <div class="bub">현재 예측 점수가 82점이야. 이 두 가지 바꾸면 91~94점 예측이 나와. 딱 두 개만 집중해.
+            <div class="data-box">
+              <strong>전지 3개월 목표</strong>
+              숙제 71% → 90% / 자기학습 +0.7h/일<br>
+              예측 도달 점수: 91~94점 (1등급 진입)
+            </div>
+          </div>
+        </div>
+        <div class="msg cli student">
+          <div class="who-row"><div class="avatar av-s3">준</div><span class="who">박준우</span></div>
+          <div class="bub">진짜요?! 그렇게 명확하게 나오는 거예요? 그럼 할 수 있겠는데요!!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="outcome">
+    <div class="out out-b"><span class="out-icon">✗</span>"2시간 공부해라"는 비교 기준 없는 막연한 지시. 동기 유발 효과 낮음.</div>
+    <div class="out out-a"><span class="out-icon">✓</span>갭을 숫자로 보여주고 달성 경로를 제시. 학생이 "할 수 있겠다"는 확신을 스스로 형성.</div>
+  </div>
+</div>
+
+</body>
+</html>

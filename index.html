@@ -70,91 +70,95 @@
       100% { background-position: 0% 50%; }
     }
 
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.55; }
+      50%       { opacity: 0.9; }
+    }
+
     .hero {
-      background: linear-gradient(-45deg, #071222, #080F1C, #091520, #071018, #0A1628, #080D18);
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(-45deg, #040C1A, #07122A, #0C1836, #060E22, #101830, #050B1A);
       background-size: 400% 400%;
-      animation: gradientFlow 10s ease infinite;
-      padding: 128px 0 140px;
+      animation: gradientFlow 12s ease infinite;
+      padding: 120px 0 136px;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 0%,  rgba(240,100,133,0.2) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 45% at 15% 85%, rgba(100,110,255,0.1) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 85% 55%, rgba(240,100,133,0.09) 0%, transparent 60%);
+      animation: glowPulse 6s ease-in-out infinite;
+      pointer-events: none;
     }
 
     .hero-inner {
-      max-width: 1120px;
+      position: relative;
+      max-width: 860px;
       margin: 0 auto;
       padding: 0 48px;
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 80px;
-      align-items: center;
     }
 
-    .confirm-pill {
+    .hero-brand {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      border: 1px solid rgba(255,255,255,0.14);
-      color: rgba(255,255,255,0.5);
-      padding: 9px 22px;
+      background: rgba(240,100,133,0.12);
+      border: 1px solid rgba(240,100,133,0.32);
+      color: var(--pink);
+      padding: 8px 20px;
       border-radius: 30px;
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 32px;
-      letter-spacing: 0.04em;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 36px;
+      text-transform: uppercase;
     }
 
-    .confirm-pill .dot {
-      width: 7px; height: 7px;
+    .hero-brand .dot {
+      width: 6px; height: 6px;
       background: var(--pink);
       border-radius: 50%;
     }
 
     .hero h1 {
-      font-size: 50px;
-      font-weight: 700;
-      color: white;
-      line-height: 1.4;
-      margin-bottom: 24px;
+      font-size: 66px;
+      font-weight: 800;
+      line-height: 1.22;
+      margin-bottom: 16px;
       word-break: keep-all;
+      background: linear-gradient(160deg, #ffffff 0%, rgba(255,255,255,0.72) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    .hero h1 .pink { color: var(--pink); }
+    .hero-subtitle {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 36px;
+      background: linear-gradient(90deg, var(--pink) 0%, #FF8FAB 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      word-break: keep-all;
+    }
 
     .hero-desc {
       font-size: 17px;
-      color: rgba(255,255,255,0.45);
-      line-height: 1.85;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.9;
       word-break: keep-all;
+      max-width: 580px;
+      margin: 0 auto;
     }
 
-    .hero-desc strong { color: rgba(255,255,255,0.75); font-weight: 600; }
-
-    .cohort-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 20px;
-      padding: 44px;
-    }
-
-    .cohort-num {
-      font-size: 84px;
-      font-weight: 700;
-      color: var(--pink);
-      line-height: 1;
-      margin-bottom: 18px;
-    }
-
-    .cohort-title {
-      font-size: 22px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.88);
-      margin-bottom: 16px;
-    }
-
-    .cohort-desc {
-      font-size: 17px;
-      color: rgba(255,255,255,0.42);
-      line-height: 1.85;
-      word-break: keep-all;
-    }
+    .hero-desc strong { color: rgba(255,255,255,0.62); font-weight: 600; }
 
 
     /* ─────────────────────────────────────
@@ -563,9 +567,9 @@
     .gift .sec-title { color: white; margin-bottom: 12px; }
 
     .gift-sub {
-      font-size: 18px;
-      color: rgba(255,255,255,0.42);
-      margin-bottom: 52px;
+      font-size: 16px;
+      color: rgba(255,255,255,0.38);
+      margin-bottom: 48px;
       line-height: 1.7;
     }
 
@@ -576,8 +580,8 @@
 
     .gift-carousel-track {
       display: flex;
-      gap: 18px;
-      animation: gift-scroll 28s linear infinite;
+      gap: 20px;
+      animation: gift-scroll 32s linear infinite;
       width: max-content;
     }
 
@@ -593,10 +597,10 @@
     .gift-card {
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 22px;
-      padding: 36px 32px;
-      width: 300px;
-      height: 300px;
+      border-radius: 26px;
+      padding: 44px 40px;
+      width: 380px;
+      height: 380px;
       flex-shrink: 0;
       display: flex;
       flex-direction: column;
@@ -609,7 +613,7 @@
     }
 
     .gift-card-num {
-      font-size: 52px;
+      font-size: 64px;
       font-weight: 700;
       color: rgba(255,255,255,0.1);
       line-height: 1;
@@ -618,18 +622,18 @@
     .gift-card.final .gift-card-num { color: var(--pink); }
 
     .gift-card-label {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.06em;
       color: rgba(255,255,255,0.3);
       text-transform: uppercase;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .gift-card.final .gift-card-label { color: rgba(240,100,133,0.7); }
 
     .gift-card-name {
-      font-size: 18px;
+      font-size: 22px;
       font-weight: 700;
       color: rgba(255,255,255,0.92);
       line-height: 1.45;
@@ -637,7 +641,7 @@
     }
 
     .gift-card-desc {
-      font-size: 13px;
+      font-size: 14px;
       color: rgba(255,255,255,0.4);
       line-height: 1.75;
       word-break: keep-all;
@@ -823,11 +827,6 @@
        RESPONSIVE
     ───────────────────────────────────── */
     @media (max-width: 960px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 48px;
-      }
-
       .kakao-layout {
         grid-template-columns: 1fr;
         gap: 32px;
@@ -850,7 +849,8 @@
       .curriculum, .kakao, .gift, .venue, .report { padding: 64px 0; }
       footer { padding: 36px 0; }
 
-      .hero h1 { font-size: 34px; }
+      .hero h1 { font-size: 38px; }
+      .hero-subtitle { font-size: 20px; }
       .sec-title { font-size: 30px; margin-bottom: 32px; }
 
       .sessions-grid { grid-template-columns: 1fr; }
@@ -866,28 +866,16 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
-      <div class="hero-left">
-        <div class="confirm-pill">
-          <span class="dot"></span>
-          결제 확인 완료
-        </div>
-        <h1>
-          데이터 경영 마스터클래스<br>
-          <span class="pink">가이드북</span>
-        </h1>
-        <p class="hero-desc">
-          <strong>우리 학원 성공방정식 찾기</strong> — 총 4회차 커리큘럼 안내,<br>
-          회차별 예습·복습 자료, 선물, 오프라인 장소까지<br>
-          이 가이드북 하나로 모두 확인하실 수 있습니다.
-        </p>
+      <div class="hero-brand">
+        <span class="dot"></span>
+        크래빗 아카데미
       </div>
-      <div class="cohort-card">
-        <div class="cohort-num">10</div>
-        <div class="cohort-title">이번 기수는 단 10명만 함께합니다</div>
-        <p class="cohort-desc">
-          첫 교육인 만큼 원장님 한 분 한 분을 더욱 꼼꼼하게 봐드리며 확실한 아웃풋을 내실 수 있도록 하기 위함입니다. 이전에도 8분과 함께했는데, 4주 내내 정말 빡빡하게 채워졌을 만큼 집중도 높은 시간을 약속드립니다.
-        </p>
-      </div>
+      <h1>데이터 경영 마스터클래스<br>가이드북</h1>
+      <div class="hero-subtitle">우리 학원만의 성공방정식 찾기</div>
+      <p class="hero-desc">
+        총 4회차 커리큘럼 안내, 회차별 예습·복습 자료,<br>
+        선물 정보, 오프라인 장소까지 — 이 가이드북 하나로 모두 확인하세요.
+      </p>
     </div>
   </section>
 
