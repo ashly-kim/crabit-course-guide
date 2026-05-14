@@ -540,6 +540,47 @@
     .detail-prep-block.review .placeholder-text { color: rgba(255,255,255,0.3); }
     .detail-prep-block.gift .placeholder-text { color: var(--pink); opacity: 0.85; font-weight: 600; }
 
+    .detail-file-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 16px;
+      padding: 22px;
+      border-radius: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+      flex: 1;
+    }
+    .detail-file-link:hover { background: #EEEDE9; border-color: #D5D3CF; }
+
+    .file-icon { font-size: 26px; flex-shrink: 0; line-height: 1; }
+
+    .file-text {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .file-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      word-break: keep-all;
+    }
+
+    .file-meta {
+      font-size: 13px;
+      color: var(--light);
+      font-weight: 500;
+    }
+
+    .file-arrow { font-size: 18px; color: var(--light); flex-shrink: 0; }
+
 
     /* ─────────────────────────────────────
        KAKAO
@@ -1191,11 +1232,15 @@
 
         <div class="detail-prep-block">
           <div class="detail-prep-label">강의자료</div>
-          <div class="detail-prep-title">슬라이드 &amp; 실습 파일</div>
-          <div class="detail-placeholder">
-            <span class="placeholder-icon">📂</span>
-            <span class="placeholder-text">강의 후 업로드 예정</span>
-          </div>
+          <div class="detail-prep-title">강의 교안</div>
+          <a href="강의자료/2회차/20260515_크래빗_AI학습성공방정식_강의교안_2차시.pdf" class="detail-file-link" target="_blank">
+            <span class="file-icon">📄</span>
+            <span class="file-text">
+              <span class="file-name">2차시 강의 교안</span>
+              <span class="file-meta">PDF · 다운로드</span>
+            </span>
+            <span class="file-arrow">↓</span>
+          </a>
         </div>
 
         <div class="detail-prep-block">
