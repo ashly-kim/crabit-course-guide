@@ -208,6 +208,19 @@
 
     .session-card.offline .card-footer { border-top-color: #FFE8EE; }
 
+    .zoom-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #BBBBBB;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .zoom-card-link:hover { color: #888; }
+
     .card-footer-arrow {
       width: 28px; height: 28px;
       background: var(--bg);
@@ -1121,6 +1134,7 @@
             <li>회귀분석의 기본 개념 소개 및 교육과정 안내</li>
             <li>우리 학원엔 지금 어떤 데이터가 있고, 앞으로 뭘 쌓아나가야 하는가</li>
           </ul>
+          <a href="#" class="zoom-card-link" onclick="event.stopPropagation()">🎥 줌 바로 입장하기</a>
           <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
         </div>
 
@@ -1137,6 +1151,7 @@
             <li>학원 데이터의 다양한 유형과 우리 학원에 맞는 변수 설계</li>
             <li>크래빗 서비스에 변수 세팅하고 데이터 입력 플로우 실습</li>
           </ul>
+          <a href="#" class="zoom-card-link" onclick="event.stopPropagation()">🎥 줌 바로 입장하기</a>
           <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
         </div>
 
@@ -1153,6 +1168,7 @@
             <li>성장방정식 구조: 시험 점수 = α + β₁×복습시간 + β₂×출석률 + …</li>
             <li>내 학원 데이터로 성장방정식 직접 도출</li>
           </ul>
+          <a href="#" class="zoom-card-link" onclick="event.stopPropagation()">🎥 줌 바로 입장하기</a>
           <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
         </div>
 
