@@ -551,9 +551,20 @@
       border: 1px solid var(--border);
       text-decoration: none;
       transition: background 0.2s, border-color 0.2s;
-      flex: 1;
     }
+    .detail-file-link:last-child { flex: 1; }
     .detail-file-link:hover { background: #EEEDE9; border-color: #D5D3CF; }
+
+    .detail-prep-block.gift .detail-file-link {
+      background: rgba(240,100,133,0.06);
+      border-color: rgba(240,100,133,0.22);
+    }
+    .detail-prep-block.gift .detail-file-link:hover {
+      background: rgba(240,100,133,0.12);
+      border-color: rgba(240,100,133,0.4);
+    }
+    .detail-prep-block.gift .file-meta { color: var(--pink); opacity: 0.85; font-weight: 600; }
+    .detail-prep-block.gift .file-arrow { color: var(--pink); }
 
     .file-icon { font-size: 26px; flex-shrink: 0; line-height: 1; }
 
@@ -1264,9 +1275,17 @@
         <div class="detail-prep-block gift">
           <div class="detail-prep-label">추가 제공 자료</div>
           <div class="detail-prep-title">원장님께 드리는 선물</div>
+          <a href="https://ashly-kim.github.io/crabit-regression-slides/prompt-list.html" class="detail-file-link" target="_blank">
+            <span class="file-icon">💬</span>
+            <span class="file-text">
+              <span class="file-name">LLM 실습용 프롬프트 가이드</span>
+              <span class="file-meta">웹 페이지 · 바로 보기</span>
+            </span>
+            <span class="file-arrow">→</span>
+          </a>
           <div class="detail-placeholder">
             <span class="placeholder-icon">🎁</span>
-            <span class="placeholder-text">연습문제 리스트</span>
+            <span class="placeholder-text">연습문제 리스트 — 추후 제공 예정</span>
           </div>
         </div>
 
