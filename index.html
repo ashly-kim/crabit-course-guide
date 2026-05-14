@@ -1111,58 +1111,67 @@
 
       .cohort-num { font-size: 60px; }
     }
-    /* 4-section detail body layout */
-    .detail-sections { display: flex; flex-direction: column; gap: 16px; }
+    /* 4-section detail body layout — 2×2 score card grid */
+    .detail-sections {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
     .detail-section {
-      background: white; border-radius: 20px;
-      padding: 36px 40px; display: flex; gap: 28px; align-items: flex-start;
+      background: white;
+      border-radius: 24px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
     .detail-section.ds-review {
-      position: relative; overflow: hidden;
-      background: linear-gradient(-45deg, #040C1A, #07122A, #0C1836, #060E22, #101830, #050B1A);
-      background-size: 400% 400%; animation: gradientFlow 12s ease infinite; color: white;
+      background: white;
+      animation: none;
+      color: var(--dark);
     }
-    .detail-section.ds-review::before {
-      content: ''; position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(240,100,133,0.18) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 50% at 90% 90%, rgba(100,110,255,0.09) 0%, transparent 60%);
-      animation: glowPulse 6s ease-in-out infinite; pointer-events: none;
-    }
-    .detail-section.ds-review > * { position: relative; }
+    .detail-section.ds-review::before { display: none; }
     .ds-num {
-      font-size: 12px; font-weight: 800; letter-spacing: 0.12em;
-      color: #D5D2CD; min-width: 28px; padding-top: 4px; flex-shrink: 0;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.14em;
+      color: #D5D2CD; margin-bottom: 12px;
     }
-    .detail-section.ds-review .ds-num { color: rgba(255,255,255,0.2); }
-    .ds-content { flex: 1; min-width: 0; }
-    .ds-title { font-size: 17px; font-weight: 800; color: var(--dark); margin-bottom: 18px; }
-    .detail-section.ds-review .ds-title { color: white; }
-    .ds-items { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .ds-items li { font-size: 15px; color: var(--mid); line-height: 1.6; padding-left: 18px; position: relative; }
-    .ds-items li::before { content: ''; position: absolute; left: 0; top: 10px; width: 5px; height: 5px; background: #DEDEDE; border-radius: 50%; }
-    .detail-section.ds-review .ds-items li { color: rgba(255,255,255,0.72); }
-    .detail-section.ds-review .ds-items li::before { background: var(--pink); }
+    .ds-content { flex: 1; }
+    .ds-title {
+      font-size: 22px; font-weight: 800; color: var(--dark);
+      margin-bottom: 22px; line-height: 1.3;
+    }
+    .detail-section.ds-review .ds-num { color: #D5D2CD; }
+    .detail-section.ds-review .ds-title { color: var(--dark); }
+    .ds-items { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .ds-items li {
+      font-size: 15px; color: var(--mid); line-height: 1.6;
+      padding-left: 18px; position: relative;
+    }
+    .ds-items li::before {
+      content: ''; position: absolute; left: 0; top: 10px;
+      width: 5px; height: 5px; background: var(--pink); border-radius: 50%;
+    }
+    .detail-section.ds-review .ds-items li { color: var(--mid); }
     .ds-resource {
-      display: flex; align-items: center; gap: 20px;
-      padding: 24px 28px; background: var(--bg); border-radius: 18px;
+      display: flex; align-items: center; gap: 18px;
+      padding: 20px 24px; background: var(--bg); border-radius: 16px;
       text-decoration: none; transition: background 0.18s, transform 0.18s;
       width: 100%; box-sizing: border-box;
     }
     .ds-resource:hover { background: #ECEAE7; transform: translateY(-2px); }
     .ds-resource-icon {
-      width: 54px; height: 54px; background: white; border-radius: 14px;
+      width: 52px; height: 52px; background: white; border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
       color: var(--pink); flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.07);
     }
     .ds-resource-info { display: flex; flex-direction: column; gap: 5px; flex: 1; }
-    .ds-resource-name { font-size: 17px; font-weight: 700; color: var(--dark); }
+    .ds-resource-name { font-size: 16px; font-weight: 700; color: var(--dark); }
     .ds-resource-meta { font-size: 13px; color: var(--light); font-weight: 500; }
     .ds-resource-arrow { color: #C8C5C0; flex-shrink: 0; }
     .ds-pending-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 13px 18px; border-radius: 12px; background: var(--bg);
-      color: var(--light); font-size: 14px; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 20px; border-radius: 14px; background: var(--bg);
+      color: var(--mid); font-size: 16px; font-weight: 700;
     }
     .detail-section .detail-gift-banner { margin-top: 0; }
     .detail-section .detail-gift-banner .gift-text { color: var(--mid); }
@@ -1486,49 +1495,41 @@
       <div class="detail-sections">
         <div class="detail-section">
           <div class="ds-num">01</div>
-          <div class="ds-content">
-            <div class="ds-title">강의자료</div>
-            <a class="ds-resource" href="강의자료/1회차/20260507_1강_강의안.pptx" download>
-              <div class="ds-resource-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></div>
-              <div class="ds-resource-info">
-                <span class="ds-resource-name">1회차 강의안.pptx</span>
-                <span class="ds-resource-meta">PowerPoint 파일 · 클릭하여 다운로드</span>
-              </div>
-              <div class="ds-resource-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
-            </a>
-          </div>
+          <div class="ds-title">강의자료</div>
+          <a class="ds-resource" href="강의자료/1회차/20260507_1강_강의안.pptx" download>
+            <div class="ds-resource-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></div>
+            <div class="ds-resource-info">
+              <span class="ds-resource-name">1회차 강의안.pptx</span>
+              <span class="ds-resource-meta">PowerPoint · 클릭하여 다운로드</span>
+            </div>
+            <div class="ds-resource-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+          </a>
         </div>
-        <div class="detail-section ds-review">
+        <div class="detail-section">
           <div class="ds-num">02</div>
-          <div class="ds-content">
-            <div class="ds-title">복습은 이렇게 해보세요!</div>
-            <ul class="ds-items">
-              <li>워크북으로 배운 개념 직접 정리해보기</li>
-            </ul>
-          </div>
+          <div class="ds-title">녹화본</div>
+          <a class="ds-resource" href="https://youtu.be/54CxjJVPRMY" target="_blank">
+            <div class="ds-resource-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></div>
+            <div class="ds-resource-info">
+              <span class="ds-resource-name">1회차 강의 녹화본</span>
+              <span class="ds-resource-meta">YouTube · 클릭하여 재생</span>
+            </div>
+            <div class="ds-resource-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </a>
         </div>
         <div class="detail-section">
           <div class="ds-num">03</div>
-          <div class="ds-content">
-            <div class="ds-title">녹화본</div>
-            <a class="ds-resource" href="https://youtu.be/54CxjJVPRMY" target="_blank">
-              <div class="ds-resource-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></div>
-              <div class="ds-resource-info">
-                <span class="ds-resource-name">1회차 강의 녹화본</span>
-                <span class="ds-resource-meta">YouTube · 클릭하여 재생</span>
-              </div>
-              <div class="ds-resource-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
-            </a>
-          </div>
+          <div class="ds-title">복습은 이렇게 해보세요!</div>
+          <ul class="ds-items">
+            <li>워크북으로 배운 개념 직접 정리해보기</li>
+          </ul>
         </div>
         <div class="detail-section">
           <div class="ds-num">04</div>
-          <div class="ds-content">
-            <div class="ds-title">추가 제공 자료</div>
-            <div class="detail-gift-banner">
-              <span class="gift-icon">🎁</span>
-              <div class="gift-text">1회차를 위해 준비한 선물<br><strong>회귀분석 전체 키워드 &amp; 개념 워크북</strong></div>
-            </div>
+          <div class="ds-title">추가 제공 자료</div>
+          <div class="detail-gift-banner">
+            <span class="gift-icon">🎁</span>
+            <div class="gift-text">1회차를 위해 준비한 선물<br><strong>회귀분석 전체 키워드 &amp; 개념 워크북</strong></div>
           </div>
         </div>
       </div>
@@ -1561,41 +1562,33 @@
       <div class="detail-sections">
         <div class="detail-section">
           <div class="ds-num">01</div>
-          <div class="ds-content">
-            <div class="ds-title">강의자료</div>
-            <div class="ds-pending-badge">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              강의자료 업로드 예정
-            </div>
+          <div class="ds-title">강의자료</div>
+          <div class="ds-pending-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            강의자료 업로드 예정
           </div>
         </div>
-        <div class="detail-section ds-review">
+        <div class="detail-section">
           <div class="ds-num">02</div>
-          <div class="ds-content">
-            <div class="ds-title">복습은 이렇게 해보세요!</div>
-            <ul class="ds-items">
-              <li>LLM에 샘플 데이터를 넣고 직접 상호작용해보면서 회귀분석의 기본 개념과 키워드 자세히 알아보기</li>
-            </ul>
+          <div class="ds-title">녹화본</div>
+          <div class="ds-pending-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            강의 후 업로드 예정
           </div>
         </div>
         <div class="detail-section">
           <div class="ds-num">03</div>
-          <div class="ds-content">
-            <div class="ds-title">녹화본</div>
-            <div class="ds-pending-badge">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              강의 후 업로드 예정
-            </div>
-          </div>
+          <div class="ds-title">복습은 이렇게 해보세요!</div>
+          <ul class="ds-items">
+            <li>LLM에 샘플 데이터를 넣고 직접 상호작용해보면서 회귀분석의 기본 개념과 키워드 자세히 알아보기</li>
+          </ul>
         </div>
         <div class="detail-section">
           <div class="ds-num">04</div>
-          <div class="ds-content">
-            <div class="ds-title">추가 제공 자료</div>
-            <div class="detail-gift-banner">
-              <span class="gift-icon">🎁</span>
-              <div class="gift-text">2회차를 위해 준비한 선물<br><strong>연습문제 리스트</strong></div>
-            </div>
+          <div class="ds-title">추가 제공 자료</div>
+          <div class="ds-pending-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            강의 후 업로드 예정
           </div>
         </div>
       </div>
@@ -1629,25 +1622,23 @@
         <div class="detail-sections">
           <div class="detail-section">
             <div class="ds-num">01</div>
-            <div class="ds-content"><div class="ds-title">강의자료</div></div>
+            <div class="ds-title">강의자료</div>
           </div>
-          <div class="detail-section ds-review">
+          <div class="detail-section">
             <div class="ds-num">02</div>
-            <div class="ds-content">
-              <div class="ds-title">복습은 이렇게 해보세요!</div>
-              <ul class="ds-items">
-                <li>샘플 데이터로 LLM 활용해 직접 회귀분석 해보기</li>
-                <li>4회차 실습을 위한 우리 학원 데이터 준비해오기</li>
-              </ul>
-            </div>
+            <div class="ds-title">녹화본</div>
           </div>
           <div class="detail-section">
             <div class="ds-num">03</div>
-            <div class="ds-content"><div class="ds-title">녹화본</div></div>
+            <div class="ds-title">복습은 이렇게 해보세요!</div>
+            <ul class="ds-items">
+              <li>샘플 데이터로 LLM 활용해 직접 회귀분석 해보기</li>
+              <li>4회차 실습을 위한 우리 학원 데이터 준비해오기</li>
+            </ul>
           </div>
           <div class="detail-section">
             <div class="ds-num">04</div>
-            <div class="ds-content"><div class="ds-title">추가 제공 자료</div></div>
+            <div class="ds-title">추가 제공 자료</div>
           </div>
         </div>
         <div class="blur-badge">
@@ -1686,24 +1677,22 @@
         <div class="detail-sections">
           <div class="detail-section">
             <div class="ds-num">01</div>
-            <div class="ds-content"><div class="ds-title">강의자료</div></div>
+            <div class="ds-title">강의자료</div>
           </div>
-          <div class="detail-section ds-review">
+          <div class="detail-section">
             <div class="ds-num">02</div>
-            <div class="ds-content">
-              <div class="ds-title">복습은 이렇게 해보세요!</div>
-              <ul class="ds-items">
-                <li>리포트카드 직접 만들고 학부모에게 전송해보기</li>
-              </ul>
-            </div>
+            <div class="ds-title">녹화본</div>
           </div>
           <div class="detail-section">
             <div class="ds-num">03</div>
-            <div class="ds-content"><div class="ds-title">녹화본</div></div>
+            <div class="ds-title">복습은 이렇게 해보세요!</div>
+            <ul class="ds-items">
+              <li>리포트카드 직접 만들고 학부모에게 전송해보기</li>
+            </ul>
           </div>
           <div class="detail-section">
             <div class="ds-num">04</div>
-            <div class="ds-content"><div class="ds-title">추가 제공 자료</div></div>
+            <div class="ds-title">추가 제공 자료</div>
           </div>
         </div>
         <div class="blur-badge">
