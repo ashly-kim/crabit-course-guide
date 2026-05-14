@@ -1144,19 +1144,21 @@
     .detail-section.ds-review .ds-items li { color: rgba(255,255,255,0.72); }
     .detail-section.ds-review .ds-items li::before { background: var(--pink); }
     .ds-resource {
-      display: inline-flex; align-items: center; gap: 16px;
-      padding: 18px 22px; background: var(--bg); border-radius: 14px;
-      text-decoration: none; transition: background 0.2s; width: 100%; box-sizing: border-box;
+      display: flex; align-items: center; gap: 20px;
+      padding: 24px 28px; background: var(--bg); border-radius: 18px;
+      text-decoration: none; transition: background 0.18s, transform 0.18s;
+      width: 100%; box-sizing: border-box;
     }
-    .ds-resource:hover { background: #ECEAE7; }
+    .ds-resource:hover { background: #ECEAE7; transform: translateY(-2px); }
     .ds-resource-icon {
-      width: 48px; height: 48px; background: white; border-radius: 12px;
+      width: 54px; height: 54px; background: white; border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
-      color: var(--pink); flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      color: var(--pink); flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.07);
     }
-    .ds-resource-info { display: flex; flex-direction: column; gap: 3px; flex: 1; }
-    .ds-resource-name { font-size: 16px; font-weight: 700; color: var(--dark); }
+    .ds-resource-info { display: flex; flex-direction: column; gap: 5px; flex: 1; }
+    .ds-resource-name { font-size: 17px; font-weight: 700; color: var(--dark); }
     .ds-resource-meta { font-size: 13px; color: var(--light); font-weight: 500; }
+    .ds-resource-arrow { color: #C8C5C0; flex-shrink: 0; }
     .ds-pending-badge {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 13px 18px; border-radius: 12px; background: var(--bg);
@@ -1178,8 +1180,8 @@
       <h1>데이터 경영 마스터클래스<br>가이드북</h1>
       <div class="hero-subtitle">우리 학원만의 성공방정식 찾기</div>
       <p class="hero-desc">
-        총 4회차 커리큘럼 안내, 회차별 예습·복습 자료,<br>
-        선물 정보, 오프라인 장소까지 — 이 가이드북 하나로 모두 확인하세요.
+        총 4회차의 커리큘럼 안내, 회차별 예습·복습 자료, 특별 선물 자료와 녹화본 링크까지 —<br>
+        이 가이드북 하나로 한번에 확인하세요.
       </p>
     </div>
   </section>
@@ -1256,7 +1258,8 @@
             <li>데이터 기반 학부모 상담의 3단계 흐름</li>
             <li>리포트카드 생성 사이트 활용법 안내</li>
           </ul>
-          <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
+          <a href="https://us06web.zoom.us/j/84714049297" target="_blank" class="zoom-card-link" onclick="event.stopPropagation()">줌 바로 입장하기</a>
+          <p style="font-size:12px;color:#BBBBBB;margin:8px 0 0;text-align:center;">오프라인 참석이 어려우신 분들을 위한 줌링크</p>
         </div>
 
       </div>
@@ -1270,6 +1273,7 @@
         <div class="kakao-left">
           <div class="sec-label">Kakao Channel</div>
           <div class="sec-title">카카오톡 채널로<br>꼼꼼하게 함께합니다</div>
+          <p style="font-size:15px;color:var(--mid);line-height:1.7;margin:16px 0 24px;">단톡방 생성 후 줌링크 전달 및 자료 전달, 그리고 자유로운 질문을 위해 채팅방을 운영할 예정입니다!</p>
           <div class="kakao-notice">
             <div class="n-icon">📅</div>
             <div class="n-text">
@@ -1490,6 +1494,7 @@
                 <span class="ds-resource-name">1회차 강의안.pptx</span>
                 <span class="ds-resource-meta">PowerPoint 파일 · 클릭하여 다운로드</span>
               </div>
+              <div class="ds-resource-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
             </a>
           </div>
         </div>
@@ -1512,6 +1517,7 @@
                 <span class="ds-resource-name">1회차 강의 녹화본</span>
                 <span class="ds-resource-meta">YouTube · 클릭하여 재생</span>
               </div>
+              <div class="ds-resource-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
             </a>
           </div>
         </div>
