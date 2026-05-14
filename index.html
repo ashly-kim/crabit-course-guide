@@ -208,16 +208,20 @@
 
     .session-card.offline .card-footer { border-top-color: #FFE8EE; }
 
+    @keyframes zoomPop {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(232, 65, 105, 0); }
+      50% { transform: scale(1.025); box-shadow: 0 6px 24px rgba(232, 65, 105, 0.28); }
+    }
     .zoom-card-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       margin-top: 16px;
-      padding: 15px 18px;
-      border-radius: 10px;
+      padding: 18px 20px;
+      border-radius: 12px;
       background: #F5F4F2;
-      font-size: 15px;
-      font-weight: 600;
+      font-size: 16px;
+      font-weight: 700;
       color: #AAAAAA;
       text-decoration: none;
       transition: background 0.2s, color 0.2s;
@@ -225,10 +229,15 @@
     }
     .zoom-card-link:hover { background: #ECEAE7; color: #888; }
     .zoom-card-link.active {
-      background: #FFF0F3;
-      color: var(--pink);
+      background: var(--pink);
+      color: #fff;
+      animation: zoomPop 2.4s ease-in-out infinite;
     }
-    .zoom-card-link.active:hover { background: #FFE4EA; }
+    .zoom-card-link.active:hover {
+      background: #d93660;
+      animation: none;
+      transform: scale(1.01);
+    }
 
     .card-footer-arrow {
       width: 28px; height: 28px;
