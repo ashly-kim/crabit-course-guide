@@ -177,6 +177,8 @@
       border: 1px solid transparent;
       cursor: pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
     }
 
     .session-card:hover {
@@ -186,14 +188,18 @@
 
     .session-card.offline { border-color: #FFE0E8; }
 
+    .card-bottom {
+      margin-top: auto;
+    }
+
     .card-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 20px;
+      margin-top: 0;
       padding-top: 16px;
       border-top: 1px solid #F2F2F2;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       color: var(--light);
     }
@@ -204,14 +210,18 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      margin-top: 16px;
-      font-size: 13px;
+      margin-bottom: 16px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      font-size: 14px;
       font-weight: 600;
-      color: #BBBBBB;
+      color: #999;
       text-decoration: none;
-      transition: color 0.2s;
+      transition: color 0.2s, background 0.2s;
     }
-    .zoom-link:hover { color: #888; }
+    .zoom-link:hover { color: #666; background: #EEEDE9; }
 
     .card-footer-arrow {
       width: 28px; height: 28px;
@@ -237,7 +247,7 @@
     }
 
     .session-date {
-      font-size: 14px;
+      font-size: 15px;
       color: var(--light);
       font-weight: 500;
     }
@@ -267,7 +277,7 @@
     .session-items li {
       display: flex;
       gap: 10px;
-      font-size: 15.5px;
+      font-size: 16px;
       color: var(--mid);
       line-height: 1.7;
       padding: 4px 0;
@@ -380,7 +390,7 @@
     }
 
     .detail-section-label {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -437,7 +447,7 @@
     }
 
     .detail-prep-label {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -607,7 +617,7 @@
     .gift-card.final .gift-card-num { color: var(--pink); }
 
     .gift-card-label {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       letter-spacing: 0.06em;
       color: rgba(255,255,255,0.3);
@@ -771,7 +781,7 @@
     }
 
     .footer-desc {
-      font-size: 15px;
+      font-size: 16px;
       color: rgba(255,255,255,0.32);
       line-height: 1.85;
     }
@@ -870,8 +880,10 @@
             <li>회귀분석의 기본 개념 소개 및 교육과정 안내</li>
             <li>우리 학원엔 지금 어떤 데이터가 있고, 앞으로 뭘 쌓아나가야 하는가</li>
           </ul>
-          <a href="#" class="zoom-link" onclick="event.stopPropagation()">🎥 줌 바로 입장하기</a>
-          <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
+          <div class="card-bottom">
+            <a href="#" class="zoom-link" onclick="event.stopPropagation()">🎥 줌 바로 입장하기</a>
+            <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
+          </div>
         </div>
 
         <div class="session-card" onclick="openDetail('d2')">
@@ -887,8 +899,10 @@
             <li>학원 데이터의 다양한 유형과 우리 학원에 맞는 변수 설계</li>
             <li>크래빗 서비스에 변수 세팅하고 데이터 입력 플로우 실습</li>
           </ul>
-          <a href="#" class="zoom-link" onclick="event.stopPropagation()">🎥 줌 바로 입장하기</a>
-          <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
+          <div class="card-bottom">
+            <a href="#" class="zoom-link" onclick="event.stopPropagation()">🎥 줌 바로 입장하기</a>
+            <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
+          </div>
         </div>
 
         <div class="session-card" onclick="openDetail('d3')">
@@ -904,8 +918,10 @@
             <li>성장방정식 구조: 시험 점수 = α + β₁×복습시간 + β₂×출석률 + …</li>
             <li>내 학원 데이터로 성장방정식 직접 도출</li>
           </ul>
-          <a href="#" class="zoom-link" onclick="event.stopPropagation()">🎥 줌 바로 입장하기</a>
-          <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
+          <div class="card-bottom">
+            <a href="#" class="zoom-link" onclick="event.stopPropagation()">🎥 줌 바로 입장하기</a>
+            <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
+          </div>
         </div>
 
         <div class="session-card offline" onclick="openDetail('d4')">
@@ -921,7 +937,9 @@
             <li>데이터 기반 학부모 상담의 3단계 흐름</li>
             <li>리포트카드 생성 사이트 활용법 안내</li>
           </ul>
-          <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
+          <div class="card-bottom">
+            <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
+          </div>
         </div>
 
       </div>
