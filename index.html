@@ -369,11 +369,42 @@
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
-      margin-bottom: 36px;
+      margin-bottom: 22px;
       transition: background 0.2s;
     }
 
     .back-btn:hover { background: rgba(255,255,255,0.14); }
+
+    .detail-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .detail-tab {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.55);
+      padding: 9px 20px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .detail-tab:hover {
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.85);
+    }
+
+    .detail-tab.active {
+      background: var(--pink);
+      border-color: var(--pink);
+      color: #fff;
+    }
 
     .detail-meta {
       display: flex;
@@ -1537,6 +1568,12 @@
     <div class="detail-header">
       <div class="detail-header-inner">
         <button class="back-btn" onclick="closeDetail()">← 돌아가기</button>
+        <div class="detail-tabs">
+          <button class="detail-tab active" onclick="switchDetail('d1')">1회차</button>
+          <button class="detail-tab" onclick="switchDetail('d2')">2회차</button>
+          <button class="detail-tab" onclick="switchDetail('d3')">3회차</button>
+          <button class="detail-tab" onclick="switchDetail('d4')">4회차</button>
+        </div>
         <div class="detail-session-num">01</div>
         <div class="detail-title">AI 시대, 살아남는 학원의 데이터 전략</div>
         <div class="detail-meta"><span class="tag tag-online">온라인</span><span class="tag tag-free">무료</span><span style="color:rgba(255,255,255,0.6);font-size:15px;margin-left:8px;">5월 7일(목) · 오후 10:30</span></div>
@@ -1604,6 +1641,12 @@
     <div class="detail-header">
       <div class="detail-header-inner">
         <button class="back-btn" onclick="closeDetail()">← 돌아가기</button>
+        <div class="detail-tabs">
+          <button class="detail-tab" onclick="switchDetail('d1')">1회차</button>
+          <button class="detail-tab active" onclick="switchDetail('d2')">2회차</button>
+          <button class="detail-tab" onclick="switchDetail('d3')">3회차</button>
+          <button class="detail-tab" onclick="switchDetail('d4')">4회차</button>
+        </div>
         <div class="detail-session-num">02</div>
         <div class="detail-title">데이터와 학원의 운명적 만남</div>
         <div class="detail-meta"><span class="tag tag-online">온라인</span><span style="color:rgba(255,255,255,0.6);font-size:15px;margin-left:8px;">5월 14일(목) · 오후 10:30</span></div>
@@ -1667,6 +1710,12 @@
     <div class="detail-header">
       <div class="detail-header-inner">
         <button class="back-btn" onclick="closeDetail()">← 돌아가기</button>
+        <div class="detail-tabs">
+          <button class="detail-tab" onclick="switchDetail('d1')">1회차</button>
+          <button class="detail-tab" onclick="switchDetail('d2')">2회차</button>
+          <button class="detail-tab active" onclick="switchDetail('d3')">3회차</button>
+          <button class="detail-tab" onclick="switchDetail('d4')">4회차</button>
+        </div>
         <div class="detail-session-num">03</div>
         <div class="detail-title">성적을 만드는 우리 학원의 성공방정식</div>
         <div class="detail-meta"><span class="tag tag-online">온라인</span><span style="color:rgba(255,255,255,0.6);font-size:15px;margin-left:8px;">5월 21일(목) · 오후 10:30</span></div>
@@ -1722,6 +1771,12 @@
     <div class="detail-header">
       <div class="detail-header-inner">
         <button class="back-btn" onclick="closeDetail()">← 돌아가기</button>
+        <div class="detail-tabs">
+          <button class="detail-tab" onclick="switchDetail('d1')">1회차</button>
+          <button class="detail-tab" onclick="switchDetail('d2')">2회차</button>
+          <button class="detail-tab" onclick="switchDetail('d3')">3회차</button>
+          <button class="detail-tab active" onclick="switchDetail('d4')">4회차</button>
+        </div>
         <div class="detail-session-num">04</div>
         <div class="detail-title">데이터 리포트카드 실전 적용</div>
         <div class="detail-meta"><span class="tag tag-offline">오프라인</span><span style="color:rgba(255,255,255,0.6);font-size:15px;margin-left:8px;">5월 28일(목) · 오전 10:00 · 장소 추후 공지</span></div>
@@ -1779,6 +1834,17 @@
     function closeDetail() {
       document.querySelectorAll('.detail-view.active').forEach(el => el.classList.remove('active'));
       document.body.style.overflow = '';
+    }
+    function switchDetail(id) {
+      const views = document.querySelectorAll('.detail-view');
+      views.forEach(v => { v.style.transition = 'none'; v.classList.remove('active'); });
+      const target = document.getElementById(id);
+      target.classList.add('active');
+      target.scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        views.forEach(v => { v.style.transition = ''; });
+      }));
     }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
   </script>
