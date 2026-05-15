@@ -1890,7 +1890,7 @@
       </div>
     </div>
     <div class="detail-body">
-      <a class="zoom-cta zoom-cta-past" href="https://us06web.zoom.us/j/87893674148" target="_blank">
+      <a class="zoom-cta zoom-cta-past" href="https://us06web.zoom.us/j/87893674148" target="_blank" onclick="pastZoomPrompt(event,'d1')">
         <span class="zoom-cta-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
         </span>
@@ -1980,7 +1980,7 @@
       </div>
     </div>
     <div class="detail-body">
-      <a class="zoom-cta zoom-cta-past" href="https://us06web.zoom.us/j/86410058002" target="_blank">
+      <a class="zoom-cta zoom-cta-past" href="https://us06web.zoom.us/j/86410058002" target="_blank" onclick="pastZoomPrompt(event,'d2')">
         <span class="zoom-cta-icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
         </span>
@@ -2171,45 +2171,44 @@
       <button class="past-modal-close" onclick="closePastModal()" aria-label="닫기">✕</button>
       <div class="past-modal-icon">🎬</div>
       <div class="past-modal-title">이미 지난 강의예요!</div>
-      <div class="past-modal-desc">이 회차는 이미 진행이 완료되었어요.<br>녹화본으로 다시 시청하시겠어요?</div>
+      <div class="past-modal-desc">이 줌 회의는 이미 종료되었어요.<br>녹화본으로 다시 시청하시겠어요?</div>
       <div class="past-modal-actions">
         <button class="pm-btn pm-btn-primary" onclick="watchRecording()">녹화본 보기</button>
-        <button class="pm-btn pm-btn-ghost" onclick="viewDetailAnyway()">강의 안내 페이지 보기</button>
+        <button class="pm-btn pm-btn-ghost" onclick="proceedZoom()">그래도 줌 입장하기</button>
       </div>
     </div>
   </div>
 
   <script>
     const pastSessions = {
-      d1: 'https://youtu.be/54CxjJVPRMY',
-      d2: 'https://youtu.be/AY6JyRpHubQ'
+      d1: { rec: 'https://youtu.be/54CxjJVPRMY', zoom: 'https://us06web.zoom.us/j/87893674148' },
+      d2: { rec: 'https://youtu.be/AY6JyRpHubQ', zoom: 'https://us06web.zoom.us/j/86410058002' }
     };
     let pendingSession = null;
 
     function goSession(id) {
-      if (pastSessions[id]) {
-        pendingSession = id;
-        document.getElementById('pastModal').classList.add('active');
-        document.body.style.overflow = 'hidden';
-      } else {
-        openDetail(id);
-      }
+      openDetail(id);
+    }
+    function pastZoomPrompt(e, id) {
+      e.preventDefault();
+      pendingSession = id;
+      document.getElementById('pastModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
     function watchRecording() {
-      if (pendingSession && pastSessions[pendingSession]) {
-        window.open(pastSessions[pendingSession], '_blank', 'noopener');
-      }
+      const s = pastSessions[pendingSession];
+      if (s) window.open(s.rec, '_blank', 'noopener');
       closePastModal();
     }
-    function viewDetailAnyway() {
-      const id = pendingSession;
+    function proceedZoom() {
+      const s = pastSessions[pendingSession];
+      if (s) window.open(s.zoom, '_blank', 'noopener');
       closePastModal();
-      if (id) openDetail(id);
     }
     function closePastModal() {
       document.getElementById('pastModal').classList.remove('active');
-      document.body.style.overflow = '';
       pendingSession = null;
+      document.body.style.overflow = document.querySelector('.detail-view.active') ? 'hidden' : '';
     }
 
     function openDetail(id) {
