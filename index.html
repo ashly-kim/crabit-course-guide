@@ -1366,6 +1366,67 @@
       .zoom-cta-main { font-size: 20px; }
       .zoom-cta-icon { width: 46px; height: 46px; }
     }
+
+    .past-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1100;
+      background: rgba(7,18,34,0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .past-modal.active { opacity: 1; pointer-events: auto; }
+
+    .past-modal-box {
+      position: relative;
+      background: #fff;
+      border-radius: 24px;
+      padding: 46px 40px 36px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+      transform: translateY(14px) scale(0.97);
+      transition: transform 0.25s;
+    }
+    .past-modal.active .past-modal-box { transform: translateY(0) scale(1); }
+
+    .past-modal-icon { font-size: 44px; margin-bottom: 16px; line-height: 1; }
+    .past-modal-title { font-size: 24px; font-weight: 800; color: var(--dark); margin-bottom: 12px; }
+    .past-modal-desc { font-size: 15px; color: var(--mid); line-height: 1.7; margin-bottom: 28px; }
+
+    .past-modal-actions { display: flex; flex-direction: column; gap: 10px; }
+
+    .pm-btn {
+      padding: 15px 24px; border-radius: 14px;
+      font-size: 15px; font-weight: 700;
+      cursor: pointer; font-family: inherit; border: none;
+      transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+    }
+    .pm-btn-primary {
+      background: linear-gradient(135deg, #F06485 0%, #e04070 100%);
+      color: #fff; box-shadow: 0 6px 20px rgba(240,100,133,0.4);
+    }
+    .pm-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(240,100,133,0.5); }
+    .pm-btn-ghost {
+      background: var(--bg); color: var(--mid); border: 1px solid var(--border);
+    }
+    .pm-btn-ghost:hover { background: #ECEAE7; }
+
+    .past-modal-close {
+      position: absolute; top: 16px; right: 16px;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--bg); border: none; color: var(--mid);
+      font-size: 14px; cursor: pointer; transition: background 0.18s;
+    }
+    .past-modal-close:hover { background: #E5E3DF; }
   </style>
 </head>
 <body>
@@ -1375,10 +1436,10 @@
     <div class="top-nav-inner">
       <div class="top-nav-brand">Crab<span class="accent">i</span>t</div>
       <div class="top-nav-tabs">
-        <button class="top-nav-tab" onclick="openDetail('d1')">1회차</button>
-        <button class="top-nav-tab" onclick="openDetail('d2')">2회차</button>
-        <button class="top-nav-tab" onclick="openDetail('d3')">3회차</button>
-        <button class="top-nav-tab" onclick="openDetail('d4')">4회차</button>
+        <button class="top-nav-tab" onclick="goSession('d1')">1회차</button>
+        <button class="top-nav-tab" onclick="goSession('d2')">2회차</button>
+        <button class="top-nav-tab" onclick="goSession('d3')">3회차</button>
+        <button class="top-nav-tab" onclick="goSession('d4')">4회차</button>
       </div>
     </div>
   </nav>
@@ -1406,7 +1467,7 @@
       <div class="sec-title">총 4회차 커리큘럼</div>
       <div class="sessions-grid">
 
-        <div class="session-card" onclick="openDetail('d1')">
+        <div class="session-card" onclick="goSession('d1')">
           <div class="session-meta">
             <span class="tag tag-online">온라인</span>
             <span class="tag tag-free">무료</span>
@@ -1424,7 +1485,7 @@
           <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
         </div>
 
-        <div class="session-card" onclick="openDetail('d2')">
+        <div class="session-card" onclick="goSession('d2')">
           <div class="session-meta">
             <span class="tag tag-online">온라인</span>
             <span class="session-date">5월 14일(목) · 오후 10:30</span>
@@ -1441,7 +1502,7 @@
           <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
         </div>
 
-        <div class="session-card" onclick="openDetail('d3')">
+        <div class="session-card" onclick="goSession('d3')">
           <div class="session-meta">
             <span class="tag tag-online">온라인</span>
             <span class="session-date">5월 21일(목) · 오후 10:30</span>
@@ -1458,7 +1519,7 @@
           <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
         </div>
 
-        <div class="session-card offline" onclick="openDetail('d4')">
+        <div class="session-card offline" onclick="goSession('d4')">
           <div class="session-meta">
             <span class="tag tag-offline">오프라인</span>
             <span class="session-date">5월 28일(목) · 오전 10:00 · 장소 추후 공지</span>
@@ -1913,7 +1974,53 @@
     </div>
   </div>
 
+  <!-- PAST SESSION MODAL -->
+  <div class="past-modal" id="pastModal">
+    <div class="past-modal-box">
+      <button class="past-modal-close" onclick="closePastModal()" aria-label="닫기">✕</button>
+      <div class="past-modal-icon">🎬</div>
+      <div class="past-modal-title">이미 지난 강의예요!</div>
+      <div class="past-modal-desc">이 회차는 이미 진행이 완료되었어요.<br>녹화본으로 다시 시청하시겠어요?</div>
+      <div class="past-modal-actions">
+        <button class="pm-btn pm-btn-primary" onclick="watchRecording()">녹화본 보기</button>
+        <button class="pm-btn pm-btn-ghost" onclick="viewDetailAnyway()">강의 안내 페이지 보기</button>
+      </div>
+    </div>
+  </div>
+
   <script>
+    const pastSessions = {
+      d1: 'https://youtu.be/54CxjJVPRMY',
+      d2: 'https://youtu.be/AY6JyRpHubQ'
+    };
+    let pendingSession = null;
+
+    function goSession(id) {
+      if (pastSessions[id]) {
+        pendingSession = id;
+        document.getElementById('pastModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } else {
+        openDetail(id);
+      }
+    }
+    function watchRecording() {
+      if (pendingSession && pastSessions[pendingSession]) {
+        window.open(pastSessions[pendingSession], '_blank', 'noopener');
+      }
+      closePastModal();
+    }
+    function viewDetailAnyway() {
+      const id = pendingSession;
+      closePastModal();
+      if (id) openDetail(id);
+    }
+    function closePastModal() {
+      document.getElementById('pastModal').classList.remove('active');
+      document.body.style.overflow = '';
+      pendingSession = null;
+    }
+
     function openDetail(id) {
       document.getElementById(id).classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -1922,7 +2029,14 @@
       document.querySelectorAll('.detail-view.active').forEach(el => el.classList.remove('active'));
       document.body.style.overflow = '';
     }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      if (document.getElementById('pastModal').classList.contains('active')) closePastModal();
+      else closeDetail();
+    });
+    document.getElementById('pastModal').addEventListener('click', e => {
+      if (e.target.id === 'pastModal') closePastModal();
+    });
   </script>
 </body>
 </html>
