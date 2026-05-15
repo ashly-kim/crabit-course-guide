@@ -1655,7 +1655,7 @@
             <li>학원 데이터의 다양한 유형과 우리 학원에 맞는 변수 설계</li>
             <li>크래빗 서비스에 변수 세팅하고 데이터 입력 플로우 실습</li>
           </ul>
-          <a href="https://us06web.zoom.us/j/86410058002" target="_blank" class="zoom-card-link active" onclick="event.stopPropagation()">줌 바로 입장하기</a>
+          <a href="https://us06web.zoom.us/j/86410058002" target="_blank" class="zoom-card-link" onclick="event.stopPropagation()">줌 바로 입장하기</a>
           <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
         </div>
 
@@ -1672,7 +1672,7 @@
             <li>성장방정식 구조: 시험 점수 = α + β₁×복습시간 + β₂×출석률 + …</li>
             <li>내 학원 데이터로 성장방정식 직접 도출</li>
           </ul>
-          <a href="https://us06web.zoom.us/j/86134993115" target="_blank" class="zoom-card-link" onclick="event.stopPropagation()">줌 바로 입장하기</a>
+          <a href="https://us06web.zoom.us/j/86134993115" target="_blank" class="zoom-card-link active" onclick="event.stopPropagation()">줌 바로 입장하기</a>
           <div class="card-footer">예습 · 복습 보기 <span class="card-footer-arrow">→</span></div>
         </div>
 
@@ -2062,6 +2062,30 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             강의 후 업로드 예정
           </div>
+        </div>
+        <div class="detail-section ds-full">
+          <div class="ds-num">05</div>
+          <div class="ds-title">2회차 핵심 내용 요약</div>
+          <table class="ds-summary-table">
+            <thead>
+              <tr><th>#</th><th>핵심 주제</th><th>핵심 내용</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>왜 회귀분석인가</td><td>학부모는 ‘근거와 예측’을 원합니다. 회귀분석은 원인→결과 경로가 투명한 ‘글래스 박스’로, 구체적인 행동 처방까지 연결됩니다.</td></tr>
+              <tr><td>2</td><td>변수 정의 (X·Y)</td><td>X는 학원이 통제·조정할 수 있는 투입(학습시간·출석률·숙제 이행률), Y는 달성하려는 결과(성적·등급·재등록률)입니다.</td></tr>
+              <tr><td>3</td><td>단순 선형 회귀</td><td>Y=aX+b. 기울기 a는 효율(투입 1단위당 성과 변화), 절편 b는 기초 실력. 목표에서 필요한 X를 역산해 행동 처방을 만듭니다.</td></tr>
+              <tr><td>4</td><td>다중 회귀 &amp; 우선순위</td><td>여러 요인의 복합 결과를 편회귀계수·p-value로 가려내고, 표준화계수(Beta)로 영향력 순위를 정합니다. 변수 중복은 VIF로 점검합니다.</td></tr>
+              <tr><td>5</td><td>시계열 예측 &amp; 개입</td><td>추세·계절성으로 3개월 성적을 신뢰구간과 함께 예측하고, 하락 2주 전 ‘골든타임’에 선제 개입합니다.</td></tr>
+            </tbody>
+          </table>
+          <ul class="ds-summary-list">
+            <li>학부모는 “열심히 가르치겠습니다”가 아니라 “데이터로 어떻게 오를지”를 듣고 싶어 합니다. 회귀분석은 원인(X)과 결과(Y)의 경로가 투명해, ‘성적이 오른 이유’와 ‘무엇을 얼마나 해야 하는지’를 함께 설명할 수 있습니다.</li>
+            <li>분석의 첫 단추는 변수 정의입니다. X는 학원이 바꿀 수 있는 투입(예습·복습 시간, 출석률, 질문·숙제 이행률), Y는 달성하려는 결과입니다. 측정 가능하고 통제 가능한 변수부터 선정합니다.</li>
+            <li>단순 회귀 Y=aX+b에서 기울기는 ‘효율’, 절편은 ‘기초 실력’입니다. 목표 성적에서 필요한 X를 역산하면 “복습을 주 4시간 늘리면 +10점”처럼 구체적인 행동 처방이 나옵니다.</li>
+            <li>성적은 한 요인이 아니라 여러 요인의 복합 결과입니다. 다중 회귀의 편회귀계수와 p-value로 실제 유의한 변수만 추리고, 표준화계수로 자원을 집중할 우선순위를 정합니다. 변수 간 중복(다중공선성)은 VIF로 점검해 정리합니다.</li>
+            <li>시계열 분석으로 추세와 계절성(시험·방학 패턴)을 찾아 3개월 성적을 신뢰구간과 함께 예측합니다. 핵심은 하락이 시작되기 2주 전에 보강·1:1 상담·리마인더로 선제 대응하는 것입니다.</li>
+          </ul>
+          <div class="ds-summary-closing">2회차의 최종 산출물은 ‘우리 학원 성장방정식 초안’입니다. 핵심 X 변수 3~5개를 추려 Y=aX+b 형태로 정리해 두시면, 이후 회차에서 바로 학원에 적용해 보실 수 있습니다.</div>
         </div>
       </div>
     </div>
