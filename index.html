@@ -1013,11 +1013,11 @@
       position: relative;
     }
 
-    .detail-blur-overlay .detail-prep-grid {
-      filter: blur(6px);
+    .detail-blur-overlay .detail-sections {
+      filter: blur(4px);
       pointer-events: none;
       user-select: none;
-      opacity: 0.5;
+      opacity: 0.6;
     }
 
     .blur-badge {
@@ -1025,28 +1025,33 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(7,18,34,0.85);
+      background: rgba(7,18,34,0.88);
       border: 1px solid rgba(240,100,133,0.35);
       border-radius: 20px;
-      padding: 24px 36px;
+      padding: 28px 36px;
       text-align: center;
       z-index: 10;
       backdrop-filter: blur(4px);
-      white-space: nowrap;
+      -webkit-backdrop-filter: blur(4px);
+      max-width: 420px;
+      width: calc(100% - 56px);
+      box-shadow: 0 16px 44px rgba(0,0,0,0.35);
     }
 
-    .blur-badge-icon { font-size: 28px; margin-bottom: 10px; }
+    .blur-badge-icon { font-size: 30px; margin-bottom: 12px; }
 
     .blur-badge-title {
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 700;
       color: white;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .blur-badge-desc {
-      font-size: 13px;
-      color: rgba(255,255,255,0.45);
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+      word-break: keep-all;
     }
 
 
@@ -2110,9 +2115,9 @@
           </div>
         </div>
         <div class="blur-badge">
-          <div class="blur-badge-icon">🔒</div>
-          <div class="blur-badge-title">3회차 강의 주차에 공개됩니다</div>
-          <div class="blur-badge-desc">5월 21일(목) 강의 당일에 상세 내용이 열려요</div>
+          <div class="blur-badge-icon">⏳</div>
+          <div class="blur-badge-title">3회차는 준비 중입니다</div>
+          <div class="blur-badge-desc">5월 21일(목) 강의 전날~다음 날 사이에<br>상세 자료 및 녹화본이 업로드될 예정입니다.</div>
         </div>
       </div>
     </div>
@@ -2165,9 +2170,9 @@
           </div>
         </div>
         <div class="blur-badge">
-          <div class="blur-badge-icon">🔒</div>
-          <div class="blur-badge-title">4회차 강의 주차에 공개됩니다</div>
-          <div class="blur-badge-desc">5월 28일(목) 강의 당일에 상세 내용이 열려요</div>
+          <div class="blur-badge-icon">⏳</div>
+          <div class="blur-badge-title">4회차는 준비 중입니다</div>
+          <div class="blur-badge-desc">5월 28일(목) 강의 전날~다음 날 사이에<br>상세 자료 및 녹화본이 업로드될 예정입니다.</div>
         </div>
       </div>
     </div>
