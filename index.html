@@ -1260,6 +1260,60 @@
     }
     .detail-section .detail-gift-banner { margin-top: 0; }
     .detail-section .detail-gift-banner .gift-text { color: var(--mid); }
+
+    .zoom-cta {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 26px 36px;
+      border-radius: 22px;
+      text-decoration: none;
+      font-family: inherit;
+      margin-bottom: 20px;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+    .zoom-cta-icon {
+      width: 56px; height: 56px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .zoom-cta-text { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+    .zoom-cta-label {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; opacity: 0.75;
+    }
+    .zoom-cta-main { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
+    .zoom-cta-id { font-size: 13px; font-weight: 500; opacity: 0.7; }
+    .zoom-cta-arrow { flex-shrink: 0; opacity: 0.7; }
+
+    .zoom-cta-live {
+      background: linear-gradient(135deg, #F06485 0%, #e04070 100%);
+      color: #fff;
+      box-shadow: 0 8px 36px rgba(240,100,133,0.45), 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .zoom-cta-live:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 48px rgba(240,100,133,0.6), 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .zoom-cta-live .zoom-cta-icon { background: rgba(255,255,255,0.22); }
+
+    .zoom-cta-past {
+      background: #FCEEF2;
+      color: #C8466C;
+      border: 1px solid #F6D7E0;
+    }
+    .zoom-cta-past:hover {
+      background: #FAE3EB;
+      transform: translateY(-2px);
+    }
+    .zoom-cta-past .zoom-cta-icon { background: rgba(240,100,133,0.16); color: #D9527A; }
+
+    @media (max-width: 680px) {
+      .zoom-cta { padding: 20px 22px; gap: 16px; }
+      .zoom-cta-main { font-size: 20px; }
+      .zoom-cta-icon { width: 46px; height: 46px; }
+    }
   </style>
 </head>
 <body>
@@ -1577,21 +1631,22 @@
         <div class="detail-session-num">01</div>
         <div class="detail-title">AI 시대, 살아남는 학원의 데이터 전략</div>
         <div class="detail-meta"><span class="tag tag-online">온라인</span><span class="tag tag-free">무료</span><span style="color:rgba(255,255,255,0.6);font-size:15px;margin-left:8px;">5월 7일(목) · 오후 10:30</span></div>
-        <div class="detail-cta">
-          <a class="btn-zoom" href="https://us06web.zoom.us/j/87893674148" target="_blank">
-            <div class="btn-zoom-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-            </div>
-            <div class="btn-zoom-text">
-              <span class="btn-zoom-label">클릭하여 Zoom 입장하기</span>
-              <span class="btn-zoom-main">줌 바로 입장하기</span>
-              <span class="btn-zoom-id">회의 ID: 878 9367 4148</span>
-            </div>
-          </a>
-        </div>
       </div>
     </div>
     <div class="detail-body">
+      <a class="zoom-cta zoom-cta-past" href="https://us06web.zoom.us/j/87893674148" target="_blank">
+        <span class="zoom-cta-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </span>
+        <span class="zoom-cta-text">
+          <span class="zoom-cta-label">지난 회차 · 줌 다시 입장</span>
+          <span class="zoom-cta-main">줌 바로 입장하기</span>
+          <span class="zoom-cta-id">회의 ID: 878 9367 4148</span>
+        </span>
+        <span class="zoom-cta-arrow">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </a>
       <div class="detail-sections">
         <div class="detail-section">
           <div class="ds-num">01</div>
@@ -1650,21 +1705,22 @@
         <div class="detail-session-num">02</div>
         <div class="detail-title">데이터와 학원의 운명적 만남</div>
         <div class="detail-meta"><span class="tag tag-online">온라인</span><span style="color:rgba(255,255,255,0.6);font-size:15px;margin-left:8px;">5월 14일(목) · 오후 10:30</span></div>
-        <div class="detail-cta">
-          <a class="btn-zoom" href="https://us06web.zoom.us/j/86410058002" target="_blank">
-            <div class="btn-zoom-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-            </div>
-            <div class="btn-zoom-text">
-              <span class="btn-zoom-label">클릭하여 Zoom 입장하기</span>
-              <span class="btn-zoom-main">줌 바로 입장하기</span>
-              <span class="btn-zoom-id">회의 ID: 864 1005 8002</span>
-            </div>
-          </a>
-        </div>
       </div>
     </div>
     <div class="detail-body">
+      <a class="zoom-cta zoom-cta-past" href="https://us06web.zoom.us/j/86410058002" target="_blank">
+        <span class="zoom-cta-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </span>
+        <span class="zoom-cta-text">
+          <span class="zoom-cta-label">지난 회차 · 줌 다시 입장</span>
+          <span class="zoom-cta-main">줌 바로 입장하기</span>
+          <span class="zoom-cta-id">회의 ID: 864 1005 8002</span>
+        </span>
+        <span class="zoom-cta-arrow">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </a>
       <div class="detail-sections">
         <div class="detail-section">
           <div class="ds-num">01</div>
@@ -1719,21 +1775,22 @@
         <div class="detail-session-num">03</div>
         <div class="detail-title">성적을 만드는 우리 학원의 성공방정식</div>
         <div class="detail-meta"><span class="tag tag-online">온라인</span><span style="color:rgba(255,255,255,0.6);font-size:15px;margin-left:8px;">5월 21일(목) · 오후 10:30</span></div>
-        <div class="detail-cta">
-          <a class="btn-zoom" href="https://us06web.zoom.us/j/86134993115" target="_blank">
-            <div class="btn-zoom-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-            </div>
-            <div class="btn-zoom-text">
-              <span class="btn-zoom-label">클릭하여 Zoom 입장하기</span>
-              <span class="btn-zoom-main">줌 바로 입장하기</span>
-              <span class="btn-zoom-id">회의 ID: 861 3499 3115</span>
-            </div>
-          </a>
-        </div>
       </div>
     </div>
     <div class="detail-body">
+      <a class="zoom-cta zoom-cta-live" href="https://us06web.zoom.us/j/86134993115" target="_blank">
+        <span class="zoom-cta-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </span>
+        <span class="zoom-cta-text">
+          <span class="zoom-cta-label">가장 가까운 강의 · 5월 21일(목) 오후 10:30</span>
+          <span class="zoom-cta-main">줌 바로 입장하기</span>
+          <span class="zoom-cta-id">회의 ID: 861 3499 3115</span>
+        </span>
+        <span class="zoom-cta-arrow">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </a>
       <div class="detail-blur-overlay">
         <div class="detail-sections">
           <div class="detail-section">
@@ -1780,21 +1837,22 @@
         <div class="detail-session-num">04</div>
         <div class="detail-title">데이터 리포트카드 실전 적용</div>
         <div class="detail-meta"><span class="tag tag-offline">오프라인</span><span style="color:rgba(255,255,255,0.6);font-size:15px;margin-left:8px;">5월 28일(목) · 오전 10:00 · 장소 추후 공지</span></div>
-        <div class="detail-cta">
-          <a class="btn-zoom" href="https://us06web.zoom.us/j/84714049297" target="_blank">
-            <div class="btn-zoom-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-            </div>
-            <div class="btn-zoom-text">
-              <span class="btn-zoom-label">오프라인 불참 시 대체 참여</span>
-              <span class="btn-zoom-main">줌으로 참여하기</span>
-              <span class="btn-zoom-id">회의 ID: 847 1404 9297</span>
-            </div>
-          </a>
-        </div>
       </div>
     </div>
     <div class="detail-body">
+      <a class="zoom-cta zoom-cta-live" href="https://us06web.zoom.us/j/84714049297" target="_blank">
+        <span class="zoom-cta-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </span>
+        <span class="zoom-cta-text">
+          <span class="zoom-cta-label">오프라인 불참 시 대체 참여 · 5월 28일(목)</span>
+          <span class="zoom-cta-main">줌으로 참여하기</span>
+          <span class="zoom-cta-id">회의 ID: 847 1404 9297</span>
+        </span>
+        <span class="zoom-cta-arrow">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </a>
       <div class="detail-blur-overlay">
         <div class="detail-sections">
           <div class="detail-section">
