@@ -395,40 +395,88 @@
       gap: 16px;
     }
 
-    .top-nav-brand {
-      font-size: 20px;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: -0.02em;
+    .top-nav-logo {
+      height: 40px;
+      display: block;
       flex-shrink: 0;
     }
 
-    .top-nav-brand .accent { color: var(--pink); }
+    .top-nav-dropdown { position: relative; flex-shrink: 0; }
 
-    .top-nav-tabs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .top-nav-tab {
+    .top-nav-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
       background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.14);
-      color: rgba(255,255,255,0.72);
-      padding: 8px 18px;
+      border: 1px solid rgba(255,255,255,0.16);
+      color: rgba(255,255,255,0.88);
+      padding: 11px 22px;
       border-radius: 30px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      transition: background 0.2s, border-color 0.2s;
     }
 
-    .top-nav-tab:hover {
-      background: var(--pink);
-      border-color: var(--pink);
+    .top-nav-trigger:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.28);
+    }
+
+    .top-nav-trigger .caret { transition: transform 0.22s; }
+    .top-nav-dropdown.open .caret { transform: rotate(180deg); }
+
+    .top-nav-menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      min-width: 340px;
+      background: #0C1628;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity 0.18s, transform 0.18s, visibility 0.18s;
+      z-index: 950;
+    }
+
+    .top-nav-dropdown.open .top-nav-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .top-nav-menu button {
+      text-align: left;
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,0.78);
+      padding: 13px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      line-height: 1.45;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .top-nav-menu button:hover {
+      background: rgba(240,100,133,0.18);
       color: #fff;
+    }
+
+    .top-nav-menu button .menu-round {
+      color: var(--pink);
+      font-weight: 800;
+      margin-right: 8px;
     }
 
     .detail-meta {
@@ -1231,12 +1279,18 @@
       .top-nav-inner {
         padding: 12px 20px;
         flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
+        align-items: center;
+        gap: 12px;
       }
-      .top-nav-tabs { justify-content: center; }
-      .top-nav-brand { text-align: center; }
-      .top-nav-tab { padding: 7px 14px; font-size: 13px; }
+      .top-nav-logo { height: 34px; }
+      .top-nav-dropdown { width: 100%; }
+      .top-nav-trigger { width: 100%; justify-content: center; }
+      .top-nav-menu {
+        right: auto;
+        left: 0;
+        min-width: 100%;
+        width: 100%;
+      }
 
       .hero h1 { font-size: 38px; }
       .hero-subtitle { font-size: 20px; }
@@ -1522,12 +1576,18 @@
   <!-- TOP NAV -->
   <nav class="top-nav">
     <div class="top-nav-inner">
-      <div class="top-nav-brand">Crab<span class="accent">i</span>t</div>
-      <div class="top-nav-tabs">
-        <button class="top-nav-tab" onclick="goSession('d1')">1회차</button>
-        <button class="top-nav-tab" onclick="goSession('d2')">2회차</button>
-        <button class="top-nav-tab" onclick="goSession('d3')">3회차</button>
-        <button class="top-nav-tab" onclick="goSession('d4')">4회차</button>
+      <img src="crabit-logo-white.png" class="top-nav-logo" alt="Crabit">
+      <div class="top-nav-dropdown" id="navDropdown">
+        <button class="top-nav-trigger" onclick="toggleNavDropdown(event)">
+          강의 회차별 상세 안내내용
+          <svg class="caret" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="top-nav-menu">
+          <button onclick="navGo('d1')"><span class="menu-round">1회차</span>AI 시대, 살아남는 학원의 데이터 전략</button>
+          <button onclick="navGo('d2')"><span class="menu-round">2회차</span>데이터와 학원의 운명적 만남</button>
+          <button onclick="navGo('d3')"><span class="menu-round">3회차</span>성적을 만드는 우리 학원의 성공방정식</button>
+          <button onclick="navGo('d4')"><span class="menu-round">4회차</span>데이터 리포트카드 실전 적용</button>
+        </div>
       </div>
     </div>
   </nav>
@@ -2160,8 +2220,23 @@
       document.querySelectorAll('.detail-view.active').forEach(el => el.classList.remove('active'));
       document.body.style.overflow = '';
     }
+    function toggleNavDropdown(e) {
+      e.stopPropagation();
+      document.getElementById('navDropdown').classList.toggle('open');
+    }
+    function navGo(id) {
+      document.getElementById('navDropdown').classList.remove('open');
+      goSession(id);
+    }
+    document.addEventListener('click', e => {
+      const dd = document.getElementById('navDropdown');
+      if (dd && !dd.contains(e.target)) dd.classList.remove('open');
+    });
+
     document.addEventListener('keydown', e => {
       if (e.key !== 'Escape') return;
+      const dd = document.getElementById('navDropdown');
+      if (dd && dd.classList.contains('open')) { dd.classList.remove('open'); return; }
       if (document.getElementById('pastModal').classList.contains('active')) closePastModal();
       else closeDetail();
     });
