@@ -1578,6 +1578,93 @@
       font-size: 14px; cursor: pointer; transition: background 0.18s;
     }
     .past-modal-close:hover { background: #E5E3DF; }
+
+    .pdf-viewer {
+      position: fixed;
+      inset: 0;
+      z-index: 1200;
+      background: #1A1F2E;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s;
+    }
+    .pdf-viewer.active { opacity: 1; visibility: visible; }
+
+    .pdf-viewer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--dark);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      flex-shrink: 0;
+    }
+
+    .pdf-viewer-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      min-width: 0;
+    }
+
+    .pdf-viewer-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .pdf-viewer-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--pink);
+      color: #fff;
+      text-decoration: none;
+      padding: 9px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .pdf-viewer-btn:hover { background: #d93660; }
+
+    .pdf-viewer-icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .pdf-viewer-icon-btn:hover { background: rgba(255,255,255,0.22); }
+
+    .pdf-viewer-frame {
+      flex: 1;
+      width: 100%;
+      border: none;
+      background: #525659;
+    }
+
+    @media (max-width: 680px) {
+      .pdf-viewer-btn { padding: 9px 13px; }
+      .pdf-viewer-title { font-size: 13px; }
+    }
   </style>
 </head>
 <body>
@@ -2010,7 +2097,7 @@
         <div class="detail-section">
           <div class="ds-num">01</div>
           <div class="ds-title">강의자료</div>
-          <a class="ds-resource" href="강의자료/2회차/20260515_크래빗_AI학습성공방정식_강의교안_2차시.pdf" download>
+          <a class="ds-resource" href="강의자료/2회차/20260515_크래빗_AI학습성공방정식_강의교안_2차시.pdf" onclick="openPdf('강의자료/2회차/20260515_크래빗_AI학습성공방정식_강의교안_2차시.pdf','2회차 강의 교안'); return false;">
             <div class="ds-resource-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></div>
             <div class="ds-resource-info">
               <span class="ds-resource-name">2회차 강의 교안 <span class="ds-tag">김상철 대표님</span></span>
@@ -2058,7 +2145,7 @@
         <div class="detail-section">
           <div class="ds-num">04</div>
           <div class="ds-title">추가 제공 자료</div>
-          <a class="ds-resource" href="강의자료/2회차/%5B2회차%5D%20원장님을%20위한%20회귀분석%20용어해설집편.pdf" download>
+          <a class="ds-resource" href="강의자료/2회차/%5B2회차%5D%20원장님을%20위한%20회귀분석%20용어해설집편.pdf" onclick="openPdf('강의자료/2회차/%5B2회차%5D%20원장님을%20위한%20회귀분석%20용어해설집편.pdf','원장님을 위한 회귀분석 용어해설집'); return false;">
             <div class="ds-resource-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></div>
             <div class="ds-resource-info">
               <span class="ds-resource-name">원장님을 위한 회귀분석 용어해설집</span>
@@ -2228,7 +2315,39 @@
     </div>
   </div>
 
+  <!-- PDF VIEWER -->
+  <div class="pdf-viewer" id="pdfViewer">
+    <div class="pdf-viewer-bar">
+      <span class="pdf-viewer-title" id="pdfViewerTitle">자료</span>
+      <div class="pdf-viewer-actions">
+        <a class="pdf-viewer-icon-btn" id="pdfViewerNewTab" href="#" target="_blank" rel="noopener" aria-label="새 탭에서 열기">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <a class="pdf-viewer-btn" id="pdfViewerDownload" href="#" download>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          다운로드
+        </a>
+        <button class="pdf-viewer-icon-btn" onclick="closePdf()" aria-label="닫기">✕</button>
+      </div>
+    </div>
+    <iframe class="pdf-viewer-frame" id="pdfViewerFrame" src="" title="PDF 미리보기"></iframe>
+  </div>
+
   <script>
+    function openPdf(url, title) {
+      document.getElementById('pdfViewerFrame').src = url;
+      document.getElementById('pdfViewerTitle').textContent = title || '자료';
+      document.getElementById('pdfViewerDownload').href = url;
+      document.getElementById('pdfViewerNewTab').href = url;
+      document.getElementById('pdfViewer').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closePdf() {
+      document.getElementById('pdfViewer').classList.remove('active');
+      document.getElementById('pdfViewerFrame').src = '';
+      document.body.style.overflow = document.querySelector('.detail-view.active') ? 'hidden' : '';
+    }
+
     const pastSessions = {
       d1: { rec: 'https://youtu.be/54CxjJVPRMY', zoom: 'https://us06web.zoom.us/j/87893674148' },
       d2: { rec: 'https://youtu.be/AY6JyRpHubQ', zoom: 'https://us06web.zoom.us/j/86410058002' }
@@ -2283,6 +2402,7 @@
 
     document.addEventListener('keydown', e => {
       if (e.key !== 'Escape') return;
+      if (document.getElementById('pdfViewer').classList.contains('active')) { closePdf(); return; }
       const dd = document.getElementById('navDropdown');
       if (dd && dd.classList.contains('open')) { dd.classList.remove('open'); return; }
       if (document.getElementById('pastModal').classList.contains('active')) closePastModal();
