@@ -1429,24 +1429,27 @@
       font-size: 15px;
       color: var(--mid);
       line-height: 1.8;
-      padding-left: 26px;
+      padding-left: 20px;
       position: relative;
       word-break: keep-all;
     }
     .ds-summary-list li::before {
-      content: '🌱';
+      content: '';
       position: absolute;
-      left: 0;
-      top: 1px;
-      font-size: 14px;
+      left: 2px;
+      top: 11px;
+      width: 6px; height: 6px;
+      background: var(--pink);
+      border-radius: 50%;
     }
     .ds-summary-closing {
       margin-top: 20px;
       padding: 18px 22px;
-      background: rgba(240,100,133,0.08);
-      border-radius: 14px;
+      background: var(--bg);
+      border-left: 3px solid var(--pink);
+      border-radius: 10px;
       font-size: 15px;
-      color: #C8466C;
+      color: var(--dark);
       line-height: 1.75;
       font-weight: 600;
       word-break: keep-all;
@@ -1939,9 +1942,13 @@
         <div class="detail-section">
           <div class="ds-num">04</div>
           <div class="ds-title">추가 제공 자료</div>
-          <a class="detail-gift-banner" href="https://ashly-kim.github.io/crabit-insight-workbook/" target="_blank" rel="noopener">
-            <span class="gift-icon">🎁</span>
-            <div class="gift-text">1회차를 위해 준비한 선물<br><strong>회귀분석 전체 키워드 &amp; 개념 워크북</strong><span class="gift-link-cue">워크북 바로 보기 →</span></div>
+          <a class="ds-resource" href="https://ashly-kim.github.io/crabit-insight-workbook/" target="_blank" rel="noopener">
+            <div class="ds-resource-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+            <div class="ds-resource-info">
+              <span class="ds-resource-name">성공방정식 관련 인사이트 워크북</span>
+              <span class="ds-resource-meta">웹 · 클릭하여 열기</span>
+            </div>
+            <div class="ds-resource-arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
           </a>
         </div>
         <div class="detail-section ds-full">
@@ -1949,22 +1956,22 @@
           <div class="ds-title">1회차 핵심 내용 요약</div>
           <table class="ds-summary-table">
             <thead>
-              <tr><th>#</th><th>핵심 주제</th><th>한 줄 정리</th></tr>
+              <tr><th>#</th><th>핵심 주제</th><th>핵심 내용</th></tr>
             </thead>
             <tbody>
-              <tr><td>1</td><td>AI 검색 시대의 학원 선택</td><td>이제 학원도 감이 아니라 ‘데이터로 증명’하는 시대로 넘어왔어요.</td></tr>
-              <tr><td>2</td><td>데이터 기반 경영의 실제 모습</td><td>거창한 게 아니라, 그동안 감으로 내리던 결정을 숫자로 뒷받침하는 작은 습관입니다.</td></tr>
-              <tr><td>3</td><td>회귀분석 기본 개념 &amp; 로드맵</td><td>결국 “무엇이 우리 학생의 성적을 움직이는가”를 찾는 도구예요.</td></tr>
-              <tr><td>4</td><td>우리 학원의 데이터 점검</td><td>지금 가진 데이터와 앞으로 쌓아야 할 데이터를 함께 살펴봤습니다.</td></tr>
+              <tr><td>1</td><td>AI 검색 시대의 학원 선택</td><td>학부모가 검색·비교로 학원을 고르는 환경에서, 성과를 데이터로 보여줄 수 있는 학원이 선택받습니다.</td></tr>
+              <tr><td>2</td><td>데이터 기반 경영의 실제</td><td>반 편성·보강 대상·상담 등 기존 의사결정에 수치 근거를 더하는 운영 방식입니다.</td></tr>
+              <tr><td>3</td><td>회귀분석 기본 개념</td><td>여러 요인 중 무엇이 성적에 실제로 영향을 주는지 수치로 가려내는 분석 도구입니다.</td></tr>
+              <tr><td>4</td><td>우리 학원 데이터 점검</td><td>현재 보유한 데이터와, 2회차 실습을 위해 추가로 모을 데이터를 정의했습니다.</td></tr>
             </tbody>
           </table>
           <ul class="ds-summary-list">
-            <li>이제 학부모님들은 검색하고 비교해서 학원을 고르세요. ‘느낌이 좋은 학원’보다 <strong>‘근거를 보여주는 학원’</strong>이 신뢰를 얻는 시대라는 점을 함께 짚어봤어요.</li>
-            <li>데이터 기반 경영은 어렵고 거창한 일이 아니에요. 원장님이 매일 내리시는 결정 하나하나에 작은 숫자 근거를 더해가는 것, 거기서부터 시작됩니다.</li>
-            <li>회귀분석이라는 말이 낯설게 느껴지셔도 괜찮아요. 핵심은 ‘우리 학생의 성적을 진짜로 움직이는 게 무엇인지’를 찾는 것이고, 앞으로 4주간 이 도구를 원장님 학원에 꼭 맞게 길들여 갈 거예요.</li>
-            <li>지금 우리 학원이 이미 가지고 있는 데이터가 무엇인지, 다음 회차를 위해 무엇을 더 모아두면 좋을지 함께 정리해봤습니다. 작은 기록 하나하나가 곧 큰 자산이 됩니다.</li>
+            <li>학부모의 학원 선택 기준이 ‘평판·느낌’에서 ‘검색으로 확인되는 근거’로 이동했습니다. 성적 변화, 출결, 학습량 같은 지표를 데이터로 제시할 수 있는 학원이 비교에서 우위를 갖습니다.</li>
+            <li>데이터 기반 경영은 새로운 시스템 도입이 아니라, 반 편성·보강 대상 선정·학부모 상담처럼 이미 하고 있는 의사결정에 수치 근거를 더하는 것에서 시작됩니다.</li>
+            <li>회귀분석은 복습 시간·출석률·과제 수행률 등 여러 요인 중 <strong>무엇이 성적을 실제로 끌어올리는지</strong>를 수치로 구분해 주는 도구입니다. 2~3회차에서 직접 다룹니다.</li>
+            <li>지금 학원이 보유한 데이터(성적·출결·상담 기록 등)를 점검하고 2회차 실습에 필요한 항목을 미리 정리해 두면, 다음 강의를 곧바로 실습으로 연결할 수 있습니다.</li>
           </ul>
-          <div class="ds-summary-closing">오늘 모든 내용이 다 이해되지 않으셨어도 정말 괜찮습니다. 한 회차씩 천천히, 원장님 속도에 맞춰 끝까지 함께 가겠습니다. 💗</div>
+          <div class="ds-summary-closing">한 번에 모든 것을 적용하지 않으셔도 됩니다. 회차마다 한 가지씩 학원에 적용해 보시는 것을 목표로, 다음 회차에서 이어가겠습니다.</div>
         </div>
       </div>
     </div>
