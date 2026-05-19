@@ -1145,6 +1145,70 @@
     .venue-deco-sub strong { color: var(--pink); font-weight: 700; }
 
 
+    /* Map preview */
+    .venue-map-wrap {
+      margin-top: 40px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: white;
+    }
+    .venue-map-iframe iframe {
+      width: 100%; height: 320px; display: block; border: none;
+    }
+    .venue-map-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .venue-map-addr {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 600; color: var(--mid);
+    }
+    .venue-map-btns { display: flex; gap: 8px; flex-shrink: 0; }
+    .map-link-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 9px 18px; border-radius: 8px;
+      font-size: 13px; font-weight: 700; text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .map-link-btn:hover { opacity: 0.82; }
+    .map-link-btn.naver { background: #03C75A; color: white; }
+    .map-link-btn.kakao { background: #FEE500; color: #3C1E1E; }
+
+    /* Transportation */
+    .venue-transport { margin-top: 40px; }
+    .transport-title {
+      font-size: 22px; font-weight: 800; color: var(--dark);
+      margin-bottom: 6px; padding-bottom: 14px;
+      border-bottom: 2px solid var(--pink);
+      display: inline-block;
+    }
+    .transport-cards {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 24px;
+    }
+    .transport-card {
+      background: white; border-radius: 16px; padding: 24px;
+      border: 1.5px solid var(--border);
+    }
+    .transport-card.tc-subway { border-color: #5EC8C8; }
+    .transport-card.tc-parking { border-color: #F0C060; }
+    .transport-card.tc-bus    { border-color: #7B8FCF; }
+    .tc-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .tc-icon {
+      width: 36px; height: 36px; border-radius: 10px; background: var(--bg);
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
+    }
+    .tc-label { font-size: 13px; font-weight: 700; color: var(--light); }
+    .tc-main { font-size: 16px; font-weight: 800; color: var(--dark); line-height: 1.5; }
+    .tc-bus-rows { display: flex; flex-direction: column; gap: 10px; }
+    .tc-bus-row { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--mid); line-height: 1.5; }
+    .tc-bus-num {
+      background: #222; color: white; border-radius: 20px;
+      padding: 2px 10px; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+
     /* ─────────────────────────────────────
        REPORT
     ───────────────────────────────────── */
@@ -1796,7 +1860,7 @@
         <div class="session-card offline" onclick="goSession('d4')">
           <div class="session-meta">
             <span class="tag tag-offline">오프라인</span>
-            <span class="session-date">5월 28일(목) · 오전 10:00 · 장소 추후 공지</span>
+            <span class="session-date">5월 28일(목) · 오전 10:00 · 광명 어반브릭스</span>
           </div>
           <div class="session-big-num">04</div>
           <div class="session-title">데이터 리포트카드 실전 적용</div>
@@ -1953,7 +2017,7 @@
           <div class="venue-rows">
             <div class="venue-row">
               <div class="v-icon">📍</div>
-              <div class="v-text">장소 미정 · 최대한 빠른 시일 내에 공지드리도록 하겠습니다</div>
+              <div class="v-text">경기 광명시 양지로 19 어반브릭스 4층 409호, 410호, 412호 — 미팅룸 B</div>
             </div>
             <div class="venue-row">
               <div class="v-icon">🕙</div>
@@ -1975,6 +2039,64 @@
           </p>
         </div>
       </div>
+
+      <!-- 지도 프리뷰 -->
+      <div class="venue-map-wrap">
+        <div class="venue-map-iframe">
+          <iframe
+            src="https://maps.google.com/maps?q=경기+광명시+양지로+19+어반브릭스&output=embed&hl=ko&z=16"
+            allowfullscreen loading="lazy">
+          </iframe>
+        </div>
+        <div class="venue-map-bar">
+          <div class="venue-map-addr">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E84169" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            경기 광명시 양지로 19 어반브릭스 4층 409호, 410호, 412호
+          </div>
+          <div class="venue-map-btns">
+            <a class="map-link-btn naver" href="https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EA%B4%91%EB%AA%85%EC%8B%9C%20%EC%96%91%EC%A7%80%EB%A1%9C%2019%20%EC%96%B4%EB%B0%98%EB%B8%8C%EB%A6%AD%EC%8A%A4%204%EC%B8%B5%20409%ED%98%B8%2C%20410%ED%98%B8%20%2C%20412%ED%98%B8/address/3zdF1O,2AFRka,%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EA%B4%91%EB%AA%85%EC%8B%9C%20%EC%96%91%EC%A7%80%EB%A1%9C%2019?isCorrectAnswer=true&c=15.00,0,0,0,dh" target="_blank">네이버 지도</a>
+            <a class="map-link-btn kakao" href="https://map.kakao.com/?q=%EA%B2%BD%EA%B8%B0%20%EA%B4%91%EB%AA%85%EC%8B%9C%20%EC%96%91%EC%A7%80%EB%A1%9C%2019%20%EC%96%B4%EB%B0%98%EB%B8%8C%EB%A6%AD%EC%8A%A4%204%EC%B8%B5%20409%ED%98%B8%2C%20410%ED%98%B8%20%2C%20412%ED%98%B8" target="_blank">카카오맵</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 교통·주차 안내 -->
+      <div class="venue-transport">
+        <div class="transport-title">교통 · 주차 안내</div>
+        <div class="transport-cards">
+          <div class="transport-card tc-subway">
+            <div class="tc-header">
+              <div class="tc-icon">🚇</div>
+              <div class="tc-label">지하철</div>
+            </div>
+            <div class="tc-main">1호선 광명역 5번 출구<br>도보 5분</div>
+          </div>
+          <div class="transport-card tc-parking">
+            <div class="tc-header">
+              <div class="tc-icon">🅿️</div>
+              <div class="tc-label">주차</div>
+            </div>
+            <div class="tc-main">건물 지하 주차장 이용<br>(카페 이용 시 2시간 무료)</div>
+          </div>
+          <div class="transport-card tc-bus">
+            <div class="tc-header">
+              <div class="tc-icon">🚌</div>
+              <div class="tc-label">버스</div>
+            </div>
+            <div class="tc-bus-rows">
+              <div class="tc-bus-row">
+                <span class="tc-bus-num">12번</span>
+                <span>안양역 출발 11번 출구 → 양지마을 도착 유플래닛 타워 5분 거리</span>
+              </div>
+              <div class="tc-bus-row">
+                <span class="tc-bus-num">2번</span>
+                <span>안양역 출발 11번 출구 → 양지마을 도착 유플래닛 타워 5분 거리</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -2283,7 +2405,7 @@
         <button class="back-btn" onclick="closeDetail()">← 돌아가기</button>
         <div class="detail-session-num">04</div>
         <div class="detail-title">데이터 리포트카드 실전 적용</div>
-        <div class="detail-meta"><span class="tag tag-offline">오프라인</span><span style="color:rgba(255,255,255,0.6);font-size:15px;margin-left:8px;">5월 28일(목) · 오전 10:00 · 장소 추후 공지</span></div>
+        <div class="detail-meta"><span class="tag tag-offline">오프라인</span><span style="color:rgba(255,255,255,0.6);font-size:15px;margin-left:8px;">5월 28일(목) · 오전 10:00 · 광명 어반브릭스</span></div>
       </div>
     </div>
     <div class="detail-body">
